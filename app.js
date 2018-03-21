@@ -53,4 +53,15 @@ app.post("/users", (request, response) => {
     .catch(err => response.status(500).send({message: err.message}))
 });
 
+app.put("/groups/:id", (request, response) => {
+    queries.update('groups', request.params.id, request.body).then(group => {
+        response.json({group});
+    })
+    .catch(err => response.status(500).send({message: err.message}))
+});
+
+app.use((request, response) => {
+    response.sendStatus(404);
+});
+
 module.exports = app;

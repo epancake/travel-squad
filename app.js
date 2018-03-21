@@ -21,6 +21,22 @@ app.get("/", (request, response) => {
     .catch(err => response.status(500).send({message: err.message}));
 });
 
+app.get("/groups", (request, response) => {
+  queries.list("groups")
+  .then(groups => {
+    response.json({ groups });
+  })
+  .catch(err => response.status(500).send({message: err.message}))
+});
+
+app.get("/users", (request, response) => {
+  queries.list("users")
+  .then(users => {
+    response.json({ users });
+  })
+  .catch(err => response.status(500).send({message: err.message}))
+});
+
 app.get("/groups/:id", (request, response) => {
     queries.read(request.params.id).then(group => {
         group

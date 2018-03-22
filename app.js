@@ -4,6 +4,8 @@ const queries = require("./queries");
 const bodyParser = require("body-parser");
 const morgan = require('morgan');
 const cors = require("cors");
+const scraper = require("./webscrpr.js")
+
 
 app.use(morgan('dev'))
 app.use(cors({origin: true}));
@@ -35,6 +37,13 @@ app.get("/users", (request, response) => {
     response.json({ users });
   })
   .catch(err => response.status(500).send({message: err.message}))
+});
+
+app.get("/search/:url", (request, response) => {
+  scraper.searchAir(request.params.url)
+    .then(listings => {
+      response.json(listings);
+    });
 });
 
 app.get("/groups/:id", (request, response) => {

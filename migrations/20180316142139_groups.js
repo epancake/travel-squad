@@ -4,6 +4,9 @@ exports.up = function(knex, Promise) {
     table.increments("id").primary();
     table.text("url");
     table.text("name");
+    table.text("airbnblink1");
+    table.text("airbnblink2");
+    table.text("airbnblink3");
   });
 };
 

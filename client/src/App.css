@@ -1,0 +1,92 @@
+.landing {
+  background: no-repeat center/100% url("./assets/splash.jpg");
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.landing-header {
+  background-color: #62825e;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-family: 'Neucha', cursive;
+  color: #eae0d3;
+  font-size: 2rem;
+  letter-spacing: 5pt
+}
+
+.memberForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.person-entry {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 1rem 0;
+}
+
+.memberForm label {
+  margin: 1rem 1rem 0rem 1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label, p {
+  font-family: 'Neucha', cursive;
+  letter-spacing: .5pt;
+  align-self: center
+}
+
+.createGroup {
+  align-self: center;
+  padding: .7rem .6rem .45rem .6rem;
+  border-radius: 5pt;
+  color: #eae0d3;
+  margin-top: 3rem;
+  box-shadow: 5px 5px 5px grey;
+}
+
+.createGroup:hover {
+  box-shadow: 5px 5px 5px rgb(91, 111, 122);
+}
+
+button, input[type="submit"] {
+  background-color: #62825e;
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  padding: .7rem 1rem .5rem 1rem;
+  margin: .5rem;
+  font-family: 'Neucha', cursive;
+  letter-spacing: 1pt;
+  font-size: 1rem;
+}
+
+input[type="text"] {
+  width: 15rem;
+}
+
+.createGroup a {
+  color: #eae0d3;
+  font-size: 1rem;
+  font-family: 'Neucha', cursive;
+  letter-spacing: 3pt
+}
+
+.formEnd {
+  width: 10rem;
+  align-self: center;
+  padding: .5rem;
+  border-radius: 5pt;
+  color: #eae0d3;
+}

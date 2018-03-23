@@ -14,12 +14,13 @@ app.use(bodyParser.json());
 app.get("/", (request, response) => {
   queries.list("groups")
     .then(groups =>
-      queries.list("users").then(users =>
-        response.json({
+      queries.list("users").then(users => queries.list("airbnb")
+        .then(questions_solvers => response.json({
           groups: groups,
           users: users,
+          airbnb: airbnb,
         })
-      ))
+        )))
     .catch(err => response.status(500).send({message: err.message}));
 });
 

@@ -9,5 +9,8 @@ exports.seed = function(knex, Promise) {
         {id: 2, bnbTitle: "Copa Cabanas", bnbUrl: "airbnb.com", bnbImageSrc: "image.com", group_id: 1},
         {id: 3, bnbTitle: "Copa Cabanan", bnbUrl: "airbnb.com", bnbImageSrc: "image.com", group_id: 1},
       ]);
+    })
+    .then(() => {
+      return knex.raw("ALTER SEQUENCE airbnb_id_seq RESTART WITH 4;");
     });
 };

@@ -1,7 +1,7 @@
 const express = require("express");
 const queries = require("../queries");
 const router = express.Router();
-const scraper = require("../webscrpr")
+const scraper = require("../webscrpr");
 
 module.exports = router;
 
@@ -19,9 +19,9 @@ router.get("/", (request, response, next) => {
     .catch(next);
 });
 
-router.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
-});
+// router.get('/', function(req, res){
+//   res.sendFile(__dirname + '/index.html');
+// });
 
 router.get("/groups", (request, response, next) => {
   queries.list("groups")

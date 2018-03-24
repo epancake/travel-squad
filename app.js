@@ -13,7 +13,7 @@ app.use(cors({origin: true}));
 app.use(bodyParser.json());
 
 app.use("/api", api);
-app.use(express.static("./client/build"));
+app.use(express.static("./build"));
 
 io.on("connection", function(socket){
   console.log("a user connected");

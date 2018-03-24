@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 const apiUrl = "https://travelsquadback.herokuapp.com/api"
 let objectToSend;
+let numOfBnbs = 0;
 
 class Lodging extends Component {
 
@@ -16,22 +17,19 @@ class Lodging extends Component {
   }
 
   componentDidMount() {
-
+    this.forceUpdate()
   }
 
   getId = (url) => {
     var arrayOfStrings = url.split("/")
-    console.log(arrayOfStrings)
     return arrayOfStrings[4].slice(-13, -5)
   }
 
   onSubmit = (event) => {
-    console.log('submitted')
     event.preventDefault()
     Promise.all([
       this.submitBnb(event),
     ]).then(results => {
-    console.log("r", results)
     })
   }
 
@@ -43,7 +41,6 @@ class Lodging extends Component {
     const id = this.getId(url)
     return fetch(apiUrl + "/search/" + id)
     .then(res => res.json())
-    .then(res => {console.log('responsebnb', res); return res})
     .then(res => {
       objectToSend = {
         "bnbTitle": res.title,
@@ -56,14 +53,12 @@ class Lodging extends Component {
         bnb1Url: url,
         bnb1ImageSrc: res.image
       });
-    console.log('objtosend', objectToSend);
     return objectToSend
       })
     .then(result => {
-      console.log("h", result)
       this.postBnb(result)})
     .catch(error => console.error('Error:', error))
-    .then(response => {console.log('Success:', this.state); return response})
+    .then(response => {console.log('Success:'); return response})
 
     }
     // post the url, image, and title to groups
@@ -80,6 +75,45 @@ class Lodging extends Component {
       }).then(res => res.json())
       .catch(error => console.error('Error:', error))
   }
+  
+  listBnbs = () => {
+    console.log("listing")
+    return this.props.airbnbs.map(bnb => {
+      console.log("bnbbefore", bnb)
+      if (bnb.group_id == window.location.href.slice(-9)) {
+        console.log("bnb", bnb)
+        numOfBnbs ++
+        return (
+          <th key={bnb.id} >{bnb.bnbTitle} <img className="bnbimg" src={bnb.bnbImageSrc}/></th>
+        )
+      }
+    })
+  }
+  
+  getUserLines = () => {
+      return this.props.users.map(user => {
+        if (user.group_id == window.location.href.slice(-9)) {
+          return (
+            <tr key={user.id} className="person">
+              <td>{user.fname + " " + user.lname}</td>
+              {this.getNum()}
+            </tr>
+          )
+        }
+      })
+    }
+    
+  getNum = () => {
+    return this.props.airbnbs.map(bnb => {
+      if (bnb.group_id == window.location.href.slice(-9)) {
+        numOfBnbs ++
+        return (
+          <td key={numOfBnbs}><input type="radio" id="dateChoice1" name="choice1" value=""/></td>
+        )
+      }
+    })
+  }
+    
 
   render() {
     return (
@@ -90,11 +124,16 @@ class Lodging extends Component {
           <label>Insert link to lodging here</label>
           <input type="text" name="bnbUrl"></input>
           <input type="submit" value="Submit"></input>
-        </form>
-        <ul>
-          <h2>{this.state.bnb1Title}</h2>
-          <img className="bnbimg" src={this.state.bnb1ImageSrc}></img>
-        </ul>
+        </form>        
+        <table>
+          <tbody>
+            <tr>
+              <th >People</th>
+              {this.listBnbs()}
+            </tr> 
+            {this.getUserLines()}
+          </tbody>
+        </table>
       </div>
     )
   }

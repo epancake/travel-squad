@@ -15,27 +15,29 @@ class GroupPage extends Component {
         inviteInfo: false,
         users: this.props.users,
         groups: this.props.groups,
-        currentGroup: {}
+        currentGroup: {},
+        groupName: ""
       }
   }
 
   componentDidMount() {
+    this.setState(() => {return {groupName: this.getGroupName()}})
   }
 
-  getGroupName(id) {
-    let groupname;
+  getGroupName = () => {
+    let groupName;
     if (!this.props.groups) {
       return <h1>No data yet, one second please!!!</h1>
     } else if (this.props.groups) {
       this.props.groups.map(group => {
-        if (group.id == id) {
-          groupname = group.name
+        if (group.id == window.location.href.slice(-9)) {
+          groupName = group.name
           currentGroup = group
           return true
         }
       })
-      return <h1>{groupname}</h1>
     }
+    return groupName
   }
 
 
@@ -44,11 +46,11 @@ class GroupPage extends Component {
 
       <div id="choices-section">
         <header className="landing-header">
-            {this.getGroupName((window.location.href.slice(-9)))}
+            <h1>{this.getGroupName()}</h1>
         </header>
         <InviteFriends users={this.props.users} status={this.state.inviteInfo} currentGroup={currentGroup}/>
         <Dates dates={this.props.dates} users={this.props.users}/>
-        <Lodging users={this.props.users}/>
+        <Lodging airbnbs={this.props.airbnbs} users={this.props.users}/>
         <Activities users={this.props.users}/>
         <Chat/>
       </div>

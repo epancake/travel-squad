@@ -19,7 +19,6 @@ class NewGroup extends Component {
   getData = () => {
     fetch(apiUrl)
     .then(res => res.json())
-    .then(res => {console.log('response', res); return res})
     .then(res => {
     this.setState({
       users: res.users,
@@ -58,9 +57,7 @@ class NewGroup extends Component {
   }
 
   postGroup = (group) => {
-    console.log("group", group)
     let url = apiUrl + "/groups"
-    console.log("url", url)
     return fetch(url, {
       method: 'POST',
       body: JSON.stringify(group),
@@ -82,14 +79,11 @@ class NewGroup extends Component {
       "lname": data.get("main-lname"),
       "group_id": this.newID
       })
-    console.log('user', mainUserToSend)
     return this.postLeader(mainUserToSend)
   }
 
   postLeader = (user) => {
-    console.log("user", user)
     let url = apiUrl + "/users"
-    console.log("url", url)
     return fetch(url, {
       method: 'POST',
       body: JSON.stringify(user),

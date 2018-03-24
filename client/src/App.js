@@ -14,7 +14,7 @@ class App extends Component {
       users: [],
       groups: [],
       dates: [],
-      airbnb: []
+      airbnbs: []
   }
 
   componentDidMount() {
@@ -24,15 +24,14 @@ class App extends Component {
   getData = () => {
     fetch(apiUrl)
     .then(res => res.json())
-    .then(res => {console.log('response', res); return res})
     .then(res => {
     this.setState({
       users: res.users,
       groups: res.groups,
       dates: res.dates,
-      aribnb: res.airbnb
+      airbnbs: res.airbnb
     })
-        })
+  })
     .catch(error => console.error('Error:', error))
     .then(response => console.log('Success:', this.state))
     }
@@ -43,8 +42,14 @@ class App extends Component {
          <div className="App">
            <Switch>
              <Route exact path="/" component={Landing} />
-             <Route path="/new" render={()=><NewGroup users={this.state.users} groups={this.state.groups}/>} />
-             <Route path="/group/:id" render={()=><GroupPage dates={this.state.dates} users={this.state.users} groups={this.state.groups}/>} />
+             <Route path="/new" render={()=><NewGroup 
+               users={this.state.users} 
+               groups={this.state.groups}/>} />
+             <Route path="/group/:id" render={()=><GroupPage 
+               airbnbs={this.state.airbnbs} 
+               dates={this.state.dates} 
+               users={this.state.users} 
+               groups={this.state.groups}/>} />
            </Switch>
          </div>
        </Router>

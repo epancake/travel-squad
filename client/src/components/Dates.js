@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 const apiUrl = "https://travelsquadback.herokuapp.com/api"
+let numOfDates = 0
 
 class Dates extends Component {
   constructor(props) {
@@ -8,15 +9,12 @@ class Dates extends Component {
   }
 
   getUserLines(id){
-    console.log("hidates", this.props)
       return this.props.users.map(user => {
         if (user.group_id == id) {
           return (
             <tr key={user.id} className="person">
               <td>{user.fname + " " + user.lname}</td>
-              <td><input type="radio" id="dateChoice1" name="choice1" value=""/></td>
-              <td><input type="radio" id="dateChoice2" name="choice2" value=""/></td>
-              <td><input type="radio" id="dateChoice3" name="choice3" value=""/></td>
+              {this.getNum()}
             </tr>
           )
         }
@@ -24,7 +22,6 @@ class Dates extends Component {
     }
   
   suggestedDates(){
-    console.log("mo", this.props.dates);
     return this.props.dates.map(date => {
       if (date.group_id == window.location.href.slice(-9)) {
         return (
@@ -56,7 +53,19 @@ class Dates extends Component {
           'Content-Type': 'application/json'
       })
       }).then(res => res.json())
+      .then(res => window.location.reload())
       .catch(error => console.error('Error:', error))
+    }
+    
+    getNum = () => {
+      return this.props.dates.map(date => {
+        if (date.group_id == window.location.href.slice(-9)) {
+          numOfDates ++
+          return (
+            <td key={Math.random()}><input type="radio" id="dateChoice1" name="choice1" value=""/></td>
+          )
+        }
+      })
     }
 
   render() {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const apiUrl = "https://travelsquadback.herokuapp.com"
+const apiUrl = "https://travelsquadback.herokuapp.com/api"
 
 class NewGroup extends Component {
 

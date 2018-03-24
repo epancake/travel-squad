@@ -6,7 +6,7 @@ import About from "./components/About.js"
 import Landing from "./components/Landing.js"
 import GroupPage from "./components/GroupPage.js"
 
-const apiUrl = "https://travelsquadback.herokuapp.com"
+const apiUrl = "https://travelsquadback.herokuapp.com/api"
 
 class App extends Component {
 

@@ -12,7 +12,7 @@ class Dates extends Component {
       return this.props.users.map(user => {
         if (user.group_id == id) {
           return (
-            <tr className="person">
+            <tr key={user.id} className="person">
               <td>{user.fname + " " + user.lname}</td>
               <td><input type="radio" id="dateChoice1" name="contact" value=""/></td>
               <td><input type="radio" id="dateChoice2" name="contact" value=""/></td>
@@ -63,13 +63,15 @@ class Dates extends Component {
         <p>Please select your preferred dates:</p>
         <form>
         <table>
-        <tr>
-          <th className="gridcol2">People</th>
-          <th className="gridcol2">April 9-21</th>
-          <th className="gridcol3">May 1-10</th>
-          <th className="gridcol4">May 19-31</th>
-        </tr> 
+          <tbody>
+            <tr>
+              <th className="gridcol2">People</th>
+              <th className="gridcol2">April 9-21</th>
+              <th className="gridcol3">May 1-10</th>
+              <th className="gridcol4">May 19-31</th>
+            </tr> 
             {this.getUserLines(window.location.href.slice(-9))}
+          </tbody>
         </table>
         <div>
           <button type="submit">Submit</button>

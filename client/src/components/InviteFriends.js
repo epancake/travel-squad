@@ -20,7 +20,7 @@ class InviteFriends extends React.Component {
       console.log("hi", this.props)
       return this.props.users.map(user => {
         if (user.group_id == window.location.href.slice(-9)) {
-          return <li className="person">{user.fname + " " + user.lname}</li>
+          return <li key={user.id} className="person">{user.fname + " " + user.lname}</li>
         }
       })
     }

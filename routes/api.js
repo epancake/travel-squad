@@ -18,6 +18,10 @@ router.get("/", (request, response, next) => {
     .catch(next);
 });
 
+router.get('/', function(req, res){
+  res.sendFile(__dirname + '/index.html');
+});
+
 router.get("/groups", (request, response, next) => {
   queries.list("groups")
     .then(groups => {
@@ -38,14 +42,6 @@ router.get("/users", (request, response, next) => {
   queries.list("users")
     .then(users => {
       response.json({ users });
-    })
-    .catch(next);
-});
-
-router.get("/dates", (request, response, next) => {
-  queries.list("dates")
-    .then(dates => {
-      response.json({ dates });
     })
     .catch(next);
 });
@@ -92,6 +88,13 @@ router.post("/airbnb", (request, response, next) => {
 router.post("/users", (request, response, next) => {
   queries.create("users", request.body).then(users => {
     response.status(201).json({users});
+  })
+    .catch(next);
+});
+
+router.post("/dates", (request, response, next) => {
+  queries.create("dates", request.body).then(dates => {
+    response.status(201).json({dates});
   })
     .catch(next);
 });

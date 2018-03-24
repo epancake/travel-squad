@@ -9,5 +9,8 @@ exports.seed = function(knex, Promise) {
         {id: 2, url: "234567890", name:"Mark turns 40"},
         {id: 3, url: "345678901", name:"Team Colombia"}
       ]);
+    })
+    .then(() => {
+      return knex.raw("ALTER SEQUENCE groups_id_seq RESTART WITH 4;");
     });
 };

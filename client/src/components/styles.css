@@ -11,12 +11,48 @@
 .invite-div {
   display: flex;
   flex-direction: column;
+  border: 1px solid grey;
+  margin: .5rem;
+}
+
+.invite-friends {
+  padding: 1rem;
+}
+
+.dates, .lodging, .activities, .chat {
+  border: 1px solid grey;
+  margin: .5rem;
+  padding: 1rem;
+}
+
+.options {
+  display:grid;
+  grid-template-rows: 15% 10% 10% 10% 10% 10% 10%;
+  grid-template-columns: 34% 22% 22% 22%;
+  justify-items: center;
+}
+
+.gridcol1 {
+  grid-column-start: 1
+}
+
+.gridcol2 {
+  grid-column-start: 2
+}
+
+.gridcol3 {
+  grid-column-start: 3
+}
+
+.gridcol4 {
+  grid-column-start: 4
 }
 
 .groupList {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 1rem;
 }
 
 .groupList ul {
@@ -36,16 +72,13 @@
 }
 
 .chat {
-  margin: 0; padding: 0;
   box-sizing: border-box;
 }
 
 .chat form {
   background: #000;
   padding: 3px;
-  position: fixed;
   bottom: 0;
-  width: 100%;
 }
 
 .chat form input {
@@ -72,4 +105,44 @@
 
 #messages li:nth-child(odd) {
   background: #eee;
+}
+
+#choices-section {
+  display: block;
+  position: relative;
+}
+
+#choices-section::after {
+  content: "";
+  background:
+  linear-gradient(
+    0deg,
+    hsla(0,0%,100%, .3) 0%,
+    hsla(0,0%,100%, .7) 100%),
+    center/150% url("../assets/beach.jpg");
+  background-repeat: repeat;
+  background-position: center;
+  opacity: 0.9;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
 }

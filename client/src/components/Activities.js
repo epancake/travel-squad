@@ -5,7 +5,7 @@ class Activities extends Component {
   render() {
     return (
 
-      <div className="landing">
+      <div className="activities">
         <h2>Activities</h2>
       </div>
     )

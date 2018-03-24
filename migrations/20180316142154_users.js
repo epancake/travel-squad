@@ -1,7 +1,8 @@
 
 exports.up = function(knex, Promise) {
   return knex.schema.createTable("users", table => {
-    table.text("email").primary();
+    table.increments("id").primary();
+    table.text("email");
     table.text("fname");
     table.text("lname");
     table.integer("group_id").references('groups.id');

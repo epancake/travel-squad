@@ -1,5 +1,5 @@
 const express = require("express");
-const queries = require("./queries");
+const queries = require("../queries");
 const router = express.Router();
 
 module.exports = router;
@@ -8,17 +8,14 @@ router.get("/", (request, response, next) => {
   queries.list("groups")
     .then(groups =>
       queries.list("users").then(users => queries.list("airbnb")
-        .then(airbnb => response.json({
+        .then(airbnb => queries.list("dates").then(dates => response.json({
           groups: groups,
           users: users,
           airbnb: airbnb,
+          dates:dates
         })
-        )))
+        ))))
     .catch(next);
-});
-
-router.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
 });
 
 router.get("/groups", (request, response, next) => {
@@ -41,6 +38,14 @@ router.get("/users", (request, response, next) => {
   queries.list("users")
     .then(users => {
       response.json({ users });
+    })
+    .catch(next);
+});
+
+router.get("/dates", (request, response, next) => {
+  queries.list("dates")
+    .then(dates => {
+      response.json({ dates });
     })
     .catch(next);
 });

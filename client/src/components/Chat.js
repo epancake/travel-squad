@@ -10,7 +10,7 @@ class Chat extends Component {
         <h2>Chat</h2>
           <ul id="messages"></ul>
           <form action="">
-            <input id="m" autocomplete="off" /><button>Send</button>
+            <input id="m" autoComplete="off" /><button>Send</button>
           </form>
       </div>
     )

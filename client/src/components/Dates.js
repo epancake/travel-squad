@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const apiUrl = "https://travelsquadback.herokuapp.com"
+const apiUrl = "https://travelsquadback.herokuapp.com/api"
 
 class Dates extends Component {
   constructor(props) {
@@ -14,14 +14,25 @@ class Dates extends Component {
           return (
             <tr key={user.id} className="person">
               <td>{user.fname + " " + user.lname}</td>
-              <td><input type="radio" id="dateChoice1" name="contact" value=""/></td>
-              <td><input type="radio" id="dateChoice2" name="contact" value=""/></td>
-              <td><input type="radio" id="dateChoice3" name="contact" value=""/></td>
+              <td><input type="radio" id="dateChoice1" name="choice1" value=""/></td>
+              <td><input type="radio" id="dateChoice2" name="choice2" value=""/></td>
+              <td><input type="radio" id="dateChoice3" name="choice3" value=""/></td>
             </tr>
           )
         }
       })
     }
+  
+  suggestedDates(){
+    console.log("mo", this.props.dates);
+    return this.props.dates.map(date => {
+      if (date.group_id == window.location.href.slice(-9)) {
+        return (
+          <td key={date.id} >{date.dateSuggestion}</td>
+        )
+      }
+    })
+  }
     
   submitDates = (event) => {
     event.preventDefault()
@@ -65,10 +76,8 @@ class Dates extends Component {
         <table>
           <tbody>
             <tr>
-              <th className="gridcol2">People</th>
-              <th className="gridcol2">April 9-21</th>
-              <th className="gridcol3">May 1-10</th>
-              <th className="gridcol4">May 19-31</th>
+              <th >People</th>
+              {this.suggestedDates()}
             </tr> 
             {this.getUserLines(window.location.href.slice(-9))}
           </tbody>

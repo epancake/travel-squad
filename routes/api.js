@@ -1,6 +1,7 @@
 const express = require("express");
 const queries = require("../queries");
 const router = express.Router();
+const scraper = require("../scraper")
 
 module.exports = router;
 

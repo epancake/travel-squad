@@ -12,7 +12,9 @@ class App extends Component {
 
   state = {
       users: [],
-      groups: []
+      groups: [],
+      dates: [],
+      airbnb: []
   }
 
   componentDidMount() {
@@ -26,7 +28,9 @@ class App extends Component {
     .then(res => {
     this.setState({
       users: res.users,
-      groups: res.groups
+      groups: res.groups,
+      dates: res.dates,
+      aribnb: res.airbnb
     })
         })
     .catch(error => console.error('Error:', error))
@@ -40,7 +44,7 @@ class App extends Component {
            <Switch>
              <Route exact path="/" component={Landing} />
              <Route path="/new" render={()=><NewGroup users={this.state.users} groups={this.state.groups}/>} />
-             <Route path="/group/:id" render={()=><GroupPage users={this.state.users} groups={this.state.groups}/>} />
+             <Route path="/group/:id" render={()=><GroupPage dates={this.state.dates} users={this.state.users} groups={this.state.groups}/>} />
            </Switch>
          </div>
        </Router>

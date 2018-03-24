@@ -47,7 +47,7 @@ class GroupPage extends Component {
             {this.getGroupName((window.location.href.slice(-9)))}
         </header>
         <InviteFriends users={this.props.users} status={this.state.inviteInfo} currentGroup={currentGroup}/>
-        <Dates users={this.props.users}/>
+        <Dates dates={this.props.dates} users={this.props.users}/>
         <Lodging users={this.props.users}/>
         <Activities users={this.props.users}/>
         <Chat/>

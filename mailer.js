@@ -3,9 +3,7 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 let smtpConfig = {
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
+  service: 'Gmail',
   auth: {
     user: 'travel.squad.app@gmail.com',
     pass: 'stuckITMWY2!'

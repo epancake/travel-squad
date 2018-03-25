@@ -77,11 +77,8 @@ class Lodging extends Component {
   }
   
   listBnbs = () => {
-    console.log("listing")
     return this.props.airbnbs.map(bnb => {
-      console.log("bnbbefore", bnb)
       if (bnb.group_id == window.location.href.slice(-9)) {
-        console.log("bnb", bnb)
         numOfBnbs ++
         return (
           <th key={bnb.id} >{bnb.bnbTitle} <img className="bnbimg" src={bnb.bnbImageSrc}/></th>

@@ -2,6 +2,8 @@ const express = require("express");
 const queries = require("../queries");
 const router = express.Router();
 const scraper = require("../webscrpr");
+const mailer = require('../mailer')
+require('dotenv').config()
 
 module.exports = router;
 
@@ -105,4 +107,26 @@ router.put("/groups/:id", (request, response, next) => {
     response.json({group});
   })
     .catch(next);
+});
+
+router.post("/send", (req, res) => {
+  const message = {
+    from: process.env.FROM_EMAIL,
+    to: process.env.TO_EMAIL,
+    subject: "Invitation to vacation",
+    text: `From: ${req.body.email}\n Sent: ${new Date()} \nMessage:\n${req.body.message}`
+  };
+
+  mailer
+    .sendMessage(message)
+    .then(()=> {
+      res.json({
+        message: "Email sent."
+      });
+    }).catch(error => {
+      res.status(500);
+      res.json({
+        error: error
+      });
+    });
 });

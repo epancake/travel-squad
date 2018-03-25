@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Modal from 'react-modal';
 import Dates from "./Dates"
 import Lodging from "./Lodging"
 import Activities from "./Activities"
@@ -7,6 +8,7 @@ import Chat from "./Chat"
 import "./styles.css"
 
 let currentGroup;
+const apiUrl = "https://travelsquadback.herokuapp.com"
 
 class GroupPage extends Component {
   constructor(props){
@@ -16,12 +18,14 @@ class GroupPage extends Component {
         users: this.props.users,
         groups: this.props.groups,
         currentGroup: {},
-        groupName: ""
+        groupName: "",
+        submitModalIsOpen: false,
       }
   }
 
   componentDidMount() {
     this.setState(() => {return {groupName: this.getGroupName()}})
+    Modal.setAppElement('.App');
   }
 
   getGroupName = () => {
@@ -39,6 +43,55 @@ class GroupPage extends Component {
     }
     return groupName
   }
+  
+  openSubmitModal = () => {
+  console.log('openine')
+  this.setState({submitModalIsOpen: true});
+
+  }
+
+  closeSubmitModal = () => {
+    this.setState({submitModalIsOpen: false});
+  }
+  
+  // sendEmail = () => {
+  //   console.log('starting to sending')
+  //   // Promise.all([
+  //   //   this.makeObject(),
+  //   // ]).then(results => {
+  //   // this.closeSubmitModal()
+  //   // })
+  // }
+
+  sendEmail = () => {
+    const objectToSend = ({
+      "message": "Hello big world",
+      "email": "Email Address"
+    })
+    return this.sendObject(objectToSend)
+  }
+
+  sendObject = (emailObject) => {
+    console.log("eo", emailObject);
+    let url = apiUrl + "/send"
+    return fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(emailObject),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+    })
+    }).then(res => res.json())
+    .catch(error => console.error('Error:', error))
+    //
+  }
+  
+  getUsers = () => {
+      return this.props.users.map(user => {
+        if (user.group_id == window.location.href.slice(-9)) {
+          return <li key={user.id} className="person">{user.fname + " " + user.lname}</li>
+        }
+      })
+  }
 
 
   render() {
@@ -46,13 +99,28 @@ class GroupPage extends Component {
 
       <div id="choices-section">
         <header className="landing-header">
-            <h1>{this.getGroupName()}</h1>
+            <h1>{this.getGroupName()} hi</h1>
+            <h2>hi</h2>
         </header>
         <InviteFriends users={this.props.users} status={this.state.inviteInfo} currentGroup={currentGroup}/>
         <Dates dates={this.props.dates} users={this.props.users}/>
         <Lodging airbnbs={this.props.airbnbs} users={this.props.users}/>
         <Activities users={this.props.users}/>
+        <input type="submit" value="Submit" onClick={this.openSubmitModal}/>
         <Chat/>
+        
+        <Modal
+          isOpen={this.state.submitModalIsOpen}
+          onRequestClose={this.closeSubmitModal}
+          contentLabel="Solved Modal"
+          onCancel={this.closeSubmitModal}
+        >
+        <h2>Send a link to all your friends!</h2>
+        <p>By pushing submit, you will be sending an invitation to this page to all members of the group:</p>
+        <ul className="userlist">{this.getUsers()}</ul>
+        <input type="submit" value="Submit" onClick={this.sendEmail()}/>
+        </Modal>
+      
       </div>
     )
   }

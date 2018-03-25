@@ -47,28 +47,6 @@ app.use((request, response) => {
 
 app.use(errorHandler);
 
-app.post("/send", (req, res) => {
-  const message = {
-    from: process.env.FROM_EMAIL,
-    to: process.env.TO_EMAIL,
-    subject: "Invitation to vacation",
-    text: `From: ${req.body.email}\n Sent: ${new Date()} \nMessage:\n${req.body.message}`
-  };
-
-  mailer
-    .sendMessage(message)
-    .then(()=> {
-      res.json({
-        message: "Email sent."
-      });
-    }).catch(error => {
-      res.status(500);
-      res.json({
-        error: "big error"
-      });
-    });
-});
-
 function errorHandler(err, req, res, next) {
   console.error("ERROR", err);
   const stack =  devMode ? err.stack : undefined;

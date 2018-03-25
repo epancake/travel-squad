@@ -8,7 +8,7 @@ import Chat from "./Chat"
 import "./styles.css"
 
 let currentGroup;
-const apiUrl = "https://travelsquadback.herokuapp.com/api"
+const apiUrl = "http://localhost:3000/api"
 
 class GroupPage extends Component {
   constructor(props){
@@ -119,7 +119,7 @@ class GroupPage extends Component {
         <h2>Send a link to all your friends!</h2>
         <p>By pushing submit, you will be sending an invitation to this page to all members of the group:</p>
         <ul className="userlist">{this.getUsers()}</ul>
-        <input type="submit" value="Submit" onClick={this.sendObject()}/>
+        <input type="submit" value="Submit" onClick={this.sendObject}/>
         </Modal>
       
       </div>

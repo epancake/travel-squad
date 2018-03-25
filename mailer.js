@@ -1,12 +1,14 @@
-const nodemailer = require("nodemailer");
+const nodemailer = require("nodemailer")
 
 require("dotenv").config();
 
 let smtpConfig = {
-  service: 'Gmail',
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
   auth: {
-    user: 'travel.squad.app@gmail.com',
-    pass: 'stuckITMWY2!'
+    user: process.env.GMAIL_ACCOUNT,
+    pass: process.env.GMAIL_PASSWORD
   }
 };
 

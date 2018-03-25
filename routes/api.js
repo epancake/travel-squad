@@ -114,14 +114,14 @@ router.post("/send", (req, res) => {
     from: process.env.FROM_EMAIL,
     to: process.env.TO_EMAIL,
     subject: "Invitation to vacation",
-    text: `From: sam Sent: ${new Date()} \nMessage:\n heyyyy`
+    text: `From: ${req.body.email}\n Sent: ${new Date()} \nMessage:\n hello`
   };
 
   mailer
     .sendMessage(message)
     .then(()=> {
       res.json({
-        message: "Email sent."
+        message: message
       });
     }).catch(error => {
       res.status(500);

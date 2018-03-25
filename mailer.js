@@ -7,8 +7,8 @@ let smtpConfig = {
   port: 465,
   secure: true,
   auth: {
-    user: process.env.GMAIL_ACCOUNT,
-    pass: process.env.GMAIL_PASSWORD
+    user: 'travel.squad.app@gmail.com',
+    pass: 'stuckITMWY2!'
   }
 };
 

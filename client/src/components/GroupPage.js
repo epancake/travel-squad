@@ -62,16 +62,20 @@ class GroupPage extends Component {
   //   // this.closeSubmitModal()
   //   // })
   // }
+  
+  mapUsers = () => {
+    this.props.users.map(user => {
+      if (user.group_id == window.location.href.slice(-9)) {
+        this.sendObject(user)
+      }
+    })
+  }
 
-  // sendEmail() {
-  // 
-  //   return this.sendObject(objectToSend)
-  // }
-
-  sendObject = () => {
+  sendObject = (user) => {
     const objectToSend = ({
-      "message": "Hello big world",
-      "email": "Email Address"
+      "url": window.location.href,
+      "email": user.email,
+      "groupName": this.getGroupName(),
     })
     console.log("eo", objectToSend);
     let url = apiUrl + "/send"
@@ -101,7 +105,6 @@ class GroupPage extends Component {
       <div id="choices-section">
         <header className="landing-header">
             <h1>{this.getGroupName()} hi</h1>
-            <h2>hi</h2>
         </header>
         <InviteFriends users={this.props.users} status={this.state.inviteInfo} currentGroup={currentGroup}/>
         <Dates dates={this.props.dates} users={this.props.users}/>
@@ -119,7 +122,7 @@ class GroupPage extends Component {
         <h2>Send a link to all your friends!</h2>
         <p>By pushing submit, you will be sending an invitation to this page to all members of the group:</p>
         <ul className="userlist">{this.getUsers()}</ul>
-        <input type="submit" value="Submit" onClick={this.sendObject}/>
+        <input type="submit" value="Submit" onClick={this.mapUsers}/>
         </Modal>
       
       </div>

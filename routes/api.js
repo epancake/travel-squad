@@ -112,9 +112,9 @@ router.put("/groups/:id", (request, response, next) => {
 router.post("/send", (req, res) => {
   const message = {
     from: process.env.FROM_EMAIL,
-    to: process.env.TO_EMAIL,
-    subject: "Invitation to vacation",
-    text: `From: ${req.body.email}\n Sent: ${new Date()} \nMessage:\n hello`
+    to: req.body.email,
+    subject: `Your trip: ${req.body.groupName}`,
+    text: `Hello from TravelSquad! You have been invited to weigh in on decisions for your upcoming trip, with the group ${req.body.groupName}. Go to this url to see and submit ideas for dates, lodging, and activities.\n${req.body.url}`
   };
 
   mailer

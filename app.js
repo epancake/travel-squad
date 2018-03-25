@@ -6,11 +6,7 @@ const cors = require("cors");
 const mailer = require('./mailer')
 require('dotenv').config()
 
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-
 const api = require('./routes/api');
-
 
 app.use(morgan("dev"));
 app.use(cors({origin: true}));
@@ -20,25 +16,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/api", api);
 app.use(express.static("./client/build"));
 
-io.on("connection", function(socket){
-  console.log("a user connected");
-});
-
 app.get('/', function(req, res){
   res.sendFile('./client/public/index.html');
-});
-
-io.on("connection", function(socket){
-  console.log("a user connected");
-  socket.on("disconnect", function(){
-    console.log("user disconnected");
-  });
-});
-
-io.on("connection", function(socket){
-  socket.on("chat message", function(msg){
-    console.log("message: " + msg);
-  });
 });
 
 app.use((request, response) => {

@@ -1,8 +1,17 @@
 const app = require("./app");
-const io = require('socket.io')();
+var socket = require('socket.io');
 
-let port = process.env.PORT || 3000
 
-console.log('listening on port ', port);
+server = app.listen(3000, function(){
+    console.log('server is running on port 3000')
+});
 
-app.listen(port);
+io = socket(server);
+
+io.on('connection', (socket) => {
+    console.log(socket.id);
+
+    socket.on('SEND_MESSAGE', function(data){
+        io.emit('RECEIVE_MESSAGE', data);
+    })
+});

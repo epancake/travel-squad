@@ -104,7 +104,7 @@ class GroupPage extends Component {
 
       <div id="choices-section">
         <header className="landing-header">
-            <h1>{this.getGroupName()} hi</h1>
+            <h1>{this.getGroupName()}</h1>
         </header>
         <InviteFriends users={this.props.users} status={this.state.inviteInfo} currentGroup={currentGroup}/>
         <Dates dates={this.props.dates} users={this.props.users}/>

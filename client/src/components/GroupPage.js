@@ -8,7 +8,7 @@ import Chat from "./Chat"
 import "./styles.css"
 
 let currentGroup;
-const apiUrl = "https://travelsquadback.herokuapp.com"
+const apiUrl = "https://travelsquadback.herokuapp.com/api"
 
 class GroupPage extends Component {
   constructor(props){
@@ -63,20 +63,21 @@ class GroupPage extends Component {
   //   // })
   // }
 
-  sendEmail = () => {
+  // sendEmail() {
+  // 
+  //   return this.sendObject(objectToSend)
+  // }
+
+  sendObject = () => {
     const objectToSend = ({
       "message": "Hello big world",
       "email": "Email Address"
     })
-    return this.sendObject(objectToSend)
-  }
-
-  sendObject = (emailObject) => {
-    console.log("eo", emailObject);
+    console.log("eo", objectToSend);
     let url = apiUrl + "/send"
     return fetch(url, {
       method: 'POST',
-      body: JSON.stringify(emailObject),
+      body: JSON.stringify(objectToSend),
       headers: new Headers({
         'Content-Type': 'application/json'
     })
@@ -118,7 +119,7 @@ class GroupPage extends Component {
         <h2>Send a link to all your friends!</h2>
         <p>By pushing submit, you will be sending an invitation to this page to all members of the group:</p>
         <ul className="userlist">{this.getUsers()}</ul>
-        <input type="submit" value="Submit" onClick={this.sendEmail()}/>
+        <input type="submit" value="Submit" onClick={this.sendObject()}/>
         </Modal>
       
       </div>

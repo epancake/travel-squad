@@ -114,7 +114,7 @@ router.post("/send", (req, res) => {
     from: process.env.FROM_EMAIL,
     to: process.env.TO_EMAIL,
     subject: "Invitation to vacation",
-    text: `From: ${req.body.email}\n Sent: ${new Date()} \nMessage:\n${req.body.message}`
+    text: `From: sam Sent: ${new Date()} \nMessage:\n heyyyy`
   };
 
   mailer

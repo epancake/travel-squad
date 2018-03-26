@@ -10,7 +10,8 @@ class Dates extends Component {
     
     this.state = {
       dates: true,
-      buttons: []
+      buttons: [],
+      row1col1: false
     }
   }
   
@@ -20,6 +21,14 @@ class Dates extends Component {
         this.setState({dates: true})
       }
     })
+    
+    fetch(apiUrl + "/buttons")
+    .then(res => res.json())
+    .then(res => {
+    this.setState({
+      buttons: res.buttons
+    })
+  })
   }
 
   getUserLines(id){
@@ -27,6 +36,7 @@ class Dates extends Component {
       return this.props.users.map(user => {
         if (user.group_id == id) {
           row++
+          numOfDates = 1
           return (
             <tr key={user.id} className="person">
               <td>{user.fname + " " + user.lname}</td>
@@ -46,34 +56,35 @@ class Dates extends Component {
       )      
     }
     
-    isItChecked = (cellName) => {
-      fetch(apiUrl + "/buttons")
-      .then(res => res.json())
-      .then(res => {
-      this.setState({
-        buttons: res.buttons
-      })
-    })
-      .then(res => {
-        return this.state.buttons.map(button => {
+    isItChecked = (row, col) => {
+      console.log('checking');
+        let buttonsArray = []
+        this.state.buttons.map(button => {
           if (button.group_id == window.location.href.slice(-9)) {
-            if (button.cellName == true) {
-              return true
-            } else return false
+            buttonsArray.push(button)
+            console.log('ba', buttonsArray);
           }
         })
-      })
-      .catch(error => console.error('Error:', error))
+        let lastSave = buttonsArray[buttonsArray.length-1]
+        console.log('ls', lastSave)
+        let cellName = `row${row}col${col}`
+        console.log('cn', cellName)
+        if (lastSave[cellName] === true) {
+          return true
+        }
     }
     
     getNum = (row) => {
       return this.props.dates.map(date => {
         if (date.group_id == window.location.href.slice(-9)) {
           numOfDates ++
+          let name = `this.state.row${row}col${numOfDates}`
+          let checkForChecks = this.isItChecked(row, numOfDates)
+          console.log("checkForChecks", checkForChecks)
           return (
             <td key={Math.random()} className="radiotd">
             <div className="flexDiv">
-              <input type="radio" checked={this.isItChecked(`row${row}col${numOfDates}`)} name={`row${row}col${numOfDates}`} id={`dateChoice${numOfDates}`} onChange={this.onSiteChanged} value=""/>
+              <input type="checkbox" defaultChecked={checkForChecks} name={`row${row}col${numOfDates}`} id={`dateChoice${numOfDates}`} value=""/>
             </div>
             </td>
           )

@@ -38,7 +38,7 @@ class App extends Component {
     .catch(error => console.error('Error:', error))
     .then(response => console.log('Success:', this.state))
     }
-    
+
   getActivities = () => {
     fetch(apiUrl + "/activities")
     .then(res => res.json())
@@ -57,15 +57,18 @@ class App extends Component {
          <div className="App">
            <Switch>
              <Route exact path="/" component={Landing} />
-             <Route path="/new" render={()=><NewGroup 
-               users={this.state.users} 
-               groups={this.state.groups}/>} />
-             <Route path="/group/:id" render={()=><GroupPage 
-               airbnbs={this.state.airbnbs} 
-               dates={this.state.dates} 
-               users={this.state.users} 
+             <Route path="/new" render={(props)=><NewGroup
+               users={this.state.users}
                groups={this.state.groups}
-               activities={this.state.activities}/>} />
+               {...props} />}
+            />
+             <Route path="/group/:id" render={(props)=><GroupPage
+               airbnbs={this.state.airbnbs}
+               dates={this.state.dates}
+               users={this.state.users}
+               groups={this.state.groups}
+               activities={this.state.activities}
+               {...props} />} />
            </Switch>
          </div>
        </Router>

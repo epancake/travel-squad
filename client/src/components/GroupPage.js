@@ -24,16 +24,14 @@ class GroupPage extends Component {
         currentGroup: {},
         groupName: "",
         submitModalIsOpen: false,
+        groupId: ""
       }
   }
 
   componentDidMount() {
-    this.setState(() => {return {groupName: this.getGroupName()}})
+    this.setState(() => {return {groupName: this.getGroupName(), groupId: this.props.match.params.id}})
     Modal.setAppElement('.App');
-    this.doOneReload()
-  }
-
-  doOneReload = () => {
+    console.log("grouppage props", this.props)
 
   }
 
@@ -43,7 +41,7 @@ class GroupPage extends Component {
       return <h1>No data yet, one second please!!!</h1>
     } else if (this.props.groups) {
       this.props.groups.map(group => {
-        if (group.id == window.location.href.slice(-9)) {
+        if (group.id == this.state.groupId) {
           groupName = group.name
           currentGroup = group
           return true
@@ -52,13 +50,13 @@ class GroupPage extends Component {
     }
     return groupName
   }
-  
+
   openSubmitModal = () => {
   console.log('openine')
   this.setState({submitModalIsOpen: true});
 
   }
-  
+
   randomEmoji = () => {
     return emojis[Math.floor(Math.random() * emojis.length)];
   };
@@ -66,7 +64,7 @@ class GroupPage extends Component {
   closeSubmitModal = () => {
     this.setState({submitModalIsOpen: false});
   }
-  
+
   sendEmail = () => {
     console.log('starting to sending')
     Promise.all([
@@ -75,7 +73,7 @@ class GroupPage extends Component {
     this.closeSubmitModal()
     })
   }
-  
+
   mapUsers = () => {
     return this.props.users.map(user => {
       if (user.group_id == window.location.href.slice(-9)) {
@@ -101,7 +99,7 @@ class GroupPage extends Component {
     }).then(res => res.json())
     .catch(error => console.error('Error:', error))
   }
-  
+
   getUsers = () => {
       return this.props.users.map(user => {
         if (user.group_id == window.location.href.slice(-9)) {
@@ -124,7 +122,7 @@ class GroupPage extends Component {
         <Lodging airbnbs={this.props.airbnbs} users={this.props.users}/>
         <Activities users={this.props.users} activities={this.props.activities}/>
         <Chat/>
-        
+
         <Modal
           isOpen={this.state.submitModalIsOpen}
           onRequestClose={this.closeSubmitModal}
@@ -139,7 +137,7 @@ class GroupPage extends Component {
         <input type="submit" value="Submit" onClick={this.sendEmail}/>
         <input type="submit" value="Cancel" onClick={this.closeSubmitModal}/>
         </Modal>
-      
+
       </div>
     )
   }

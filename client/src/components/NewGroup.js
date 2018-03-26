@@ -11,6 +11,7 @@ class NewGroup extends Component {
     this.submitLeader = this.submitLeader.bind(this);
     this.postGroup = this.postGroup.bind(this)
     this.postLeader = this.postLeader.bind(this)
+    console.log("monday props", this.props)
 
     this.getData()
     this.getId()

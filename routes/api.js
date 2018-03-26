@@ -57,6 +57,22 @@ router.get("/buttons", (request, response, next) => {
     .catch(next);
 });
 
+router.get("/bnbbuttons", (request, response, next) => {
+  queries.list("bnbbuttons")
+    .then(bnbbuttons => {
+      response.json({ bnbbuttons });
+    })
+    .catch(next);
+});
+
+router.get("/activitiesbuttons", (request, response, next) => {
+  queries.list("activitiesbuttons")
+    .then(activitiesbuttons => {
+      response.json({ activitiesbuttons });
+    })
+    .catch(next);
+});
+
 router.get("/search/:url", (request, response, next) => {
   scraper.searchAir(request.params.url)
     .then(listings => {
@@ -113,6 +129,20 @@ router.post("/dates", (request, response, next) => {
 router.post("/buttons", (request, response, next) => {
   queries.create("buttons", request.body).then(buttons => {
     response.status(201).json({buttons});
+  })
+    .catch(next);
+});
+
+router.post("/bnbbuttons", (request, response, next) => {
+  queries.create("bnbbuttons", request.body).then(bnbbuttons => {
+    response.status(201).json({bnbbuttons});
+  })
+    .catch(next);
+});
+
+router.post("/activitiesbuttons", (request, response, next) => {
+  queries.create("activitiesbuttons", request.body).then(activitiesbuttons => {
+    response.status(201).json({activitiesbuttons});
   })
     .catch(next);
 });

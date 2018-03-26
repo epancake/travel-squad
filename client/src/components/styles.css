@@ -57,6 +57,10 @@ h3 {
   padding: 1rem;
 }
 
+.modalBody {
+  padding: 2rem;
+}
+
 /*********Dates********/
 
 .submissionForm {
@@ -196,5 +200,5 @@ tr:nth-child(even) {
 }
 
 .userlist {
-  list-style: disc;
+  padding: 1rem .5rem
 }

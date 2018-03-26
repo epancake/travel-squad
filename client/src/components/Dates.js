@@ -5,23 +5,16 @@ let numOfDates = 0
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; 
 
 class Dates extends Component {
+  
   constructor(props) {
     super(props)
-    
+  
     this.state = {
-      dates: true,
       buttons: [],
-      row1col1: false
     }
   }
   
   componentDidMount() {
-    this.props.dates.map(date => {
-      if (date.group_id == window.location.href.slice(-9)) {
-        this.setState({dates: true})
-      }
-    })
-    
     fetch(apiUrl + "/buttons")
     .then(res => res.json())
     .then(res => {
@@ -36,7 +29,6 @@ class Dates extends Component {
       return this.props.users.map(user => {
         if (user.group_id == id) {
           row++
-          numOfDates = 1
           return (
             <tr key={user.id} className="person">
               <td>{user.fname + " " + user.lname}</td>
@@ -48,27 +40,29 @@ class Dates extends Component {
     }
     
     finalRow(){
-      return (
-        <tr className="final">
-          <td>Final Choice</td>
-          {this.getNum(this.props.users.length+1)}
-        </tr>
-      )      
+      let usersHere = 0
+      this.props.users.map(user => {
+        if (user.group_id == window.location.href.slice(-9)) {
+          usersHere++
+        }
+      })
+        return (
+          <tr className="final">
+            <td>Final Choice</td>
+            {this.getNum(usersHere+1)}
+          </tr>
+        )
     }
     
     isItChecked = (row, col) => {
-      console.log('checking');
         let buttonsArray = []
         this.state.buttons.map(button => {
           if (button.group_id == window.location.href.slice(-9)) {
             buttonsArray.push(button)
-            console.log('ba', buttonsArray);
           }
         })
         let lastSave = buttonsArray[buttonsArray.length-1]
-        console.log('ls', lastSave)
         let cellName = `row${row}col${col}`
-        console.log('cn', cellName)
         if (lastSave) {
           if (lastSave[cellName] === true) {
             return true
@@ -78,12 +72,12 @@ class Dates extends Component {
     }
     
     getNum = (row) => {
+      numOfDates = 0
       return this.props.dates.map(date => {
         if (date.group_id == window.location.href.slice(-9)) {
           numOfDates ++
           let name = `this.state.row${row}col${numOfDates}`
           let checkForChecks = this.isItChecked(row, numOfDates)
-          console.log("checkForChecks", checkForChecks)
           return (
             <td key={Math.random()} className="radiotd">
             <div className="flexDiv">
@@ -109,7 +103,6 @@ class Dates extends Component {
     event.preventDefault()
     const groupID = window.location.href.slice(-9)
     const form = event.target;
-    console.log("f", form)
     const data = new FormData(form);
     const startDateMonth = () => {
       if (data.get("dateStart")[5] > 0) {
@@ -131,7 +124,6 @@ class Dates extends Component {
       "dateSuggestion": `${Month("dateStart")} ${Day("dateStart")}, ${Year("dateStart")} to ${Month("dateEnd")} ${Day("dateEnd")}, ${Year("dateEnd")}`,
       "group_id": groupID
       })
-    console.log('dateSuggestion', dateToSend)
     this.postDate(dateToSend)
   }
 
@@ -245,7 +237,6 @@ class Dates extends Component {
         "row3col4": row3col4(),
         "row3col5": row3col5()
       };
-      console.log("ob", objectToSend)
       this.postButtons(objectToSend)  
     }
     

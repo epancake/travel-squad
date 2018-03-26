@@ -8,16 +8,24 @@ class Lodging extends Component {
 
   constructor(props){
     super(props)
+    
     this.state = {
       bnb1Title: "",
       bnb1Url: "",
-      bnb1ImageSrc: ""
+      bnb1ImageSrc: "",
+      buttons: []
     }
 
   }
 
   componentDidMount() {
-    this.forceUpdate()
+    fetch(apiUrl + "/buttons")
+    .then(res => res.json())
+    .then(res => {
+    this.setState({
+      buttons: res.bnbButtons
+    })
+  })
   }
 
   getId = (url) => {
@@ -76,10 +84,75 @@ class Lodging extends Component {
       .catch(error => console.error('Error:', error))
   }
   
+  getUserLines(id){
+    let row = 0
+    return this.props.users.map(user => {
+      if (user.group_id == id) {
+        row++
+        return (
+          <tr key={user.id} className="person">
+            <td>{user.fname + " " + user.lname}</td>
+            {this.getNum(row)}
+          </tr>
+        )
+      }
+    })
+  }
+  
+  finalRow(){
+      let usersHere = 0
+      this.props.users.map(user => {
+        if (user.group_id == window.location.href.slice(-9)) {
+          usersHere++
+        }
+      })
+        return (
+          <tr className="final">
+            <td>Final Choice</td>
+            {this.getNum(usersHere+1)}
+          </tr>
+        )
+    }
+    
+    isItChecked = (row, col) => {
+        let buttonsArray = []
+        this.state.buttons.map(button => {
+          if (button.group_id == window.location.href.slice(-9)) {
+            buttonsArray.push(button)
+          }
+        })
+        let lastSave = buttonsArray[buttonsArray.length-1]
+        let cellName = `row${row}col${col}`
+        if (lastSave) {
+          if (lastSave[cellName] === true) {
+            return true
+          } 
+        } else return false
+
+    }
+    
+    getNum = (row) => {
+      numOfBnbs = 0
+      return this.props.airbnbs.map(bnb => {
+        if (bnb.group_id == window.location.href.slice(-9)) {
+          numOfBnbs ++
+          let name = `this.state.row${row}col${numOfBnbs}`
+          let checkForChecks = this.isItChecked(row, numOfBnbs)
+          return (
+            <td key={Math.random()} className="radiotd">
+            <div className="flexDiv">
+              <input type="checkbox" defaultChecked={checkForChecks} name={`row${row}col${numOfBnbs}`} id={`bnbChoice${numOfBnbs}`} value=""/>
+            </div>
+            </td>
+          )
+        }
+      })
+    }
+  
+  
   listBnbs = () => {
     return this.props.airbnbs.map(bnb => {
       if (bnb.group_id == window.location.href.slice(-9)) {
-        numOfBnbs ++
         return (
           <th key={bnb.id} className="bnbCard">
             <div className="bnbTitle">
@@ -94,32 +167,116 @@ class Lodging extends Component {
     })
   }
   
-  getUserLines = () => {
-      return this.props.users.map(user => {
-        if (user.group_id == window.location.href.slice(-9)) {
-          return (
-            <tr key={user.id} className="person">
-              <td>{user.fname + " " + user.lname}</td>
-              {this.getNum()}
-            </tr>
-          )
-        }
-      })
+  onSubmitRadioForm = (event) => {
+    event.preventDefault()
+    const form = event.target;
+    const data = new FormData(form);
+    const row1col1 = () => {
+      if (data.get("row1col1") != null) {
+      return true
+      } else return false
     }
-    
-  getNum = () => {
-    return this.props.airbnbs.map(bnb => {
-      if (bnb.group_id == window.location.href.slice(-9)) {
-        numOfBnbs ++
-        return (
-          <td className="radiotd" key={numOfBnbs}>
-            <div className="flexDiv">
-              <input type="radio" id="dateChoice1" className="radio" name="choice1" value=""/>
-            </div>
-          </td>
-        )
-      }
+    const row1col2 = () => {
+      if (data.get("row1col2") != null) {
+      return true
+      } else return false
+    }
+    const row1col3 = () => {
+      if (data.get("row1col3") != null) {
+      return true
+      } else return false
+    }
+    const row1col4 = () => {
+      if (data.get("row1col4") != null) {
+      return true
+      } else return false
+    }
+    const row1col5 = () => {
+      if (data.get("row1col5") != null) {
+      return true
+      } else return false
+    }
+    const row2col1 = () => {
+      if (data.get("row2col1") != null) {
+      return true
+      } else return false
+    }
+    const row2col2 = () => {
+      if (data.get("row2col2") != null) {
+      return true
+      } else return false
+    }
+    const row2col3 = () => {
+      if (data.get("row2col3") != null) {
+      return true
+      } else return false
+    }
+    const row2col4 = () => {
+      if (data.get("row2col4") != null) {
+      return true
+      } else return false
+    }
+    const row2col5 = () => {
+      if (data.get("row2col5") != null) {
+      return true
+      } else return false
+    }
+    const row3col1 = () => {
+      if (data.get("row3col1") != null) {
+      return true
+      } else return false
+    }
+    const row3col2 = () => {
+      if (data.get("row3col2") != null) {
+      return true
+      } else return false
+    }
+    const row3col3 = () => {
+      if (data.get("row3col3") != null) {
+      return true
+      } else return false
+    }
+    const row3col4 = () => {
+      if (data.get("row3col4") != null) {
+      return true
+      } else return false
+    }
+    const row3col5 = () => {
+      if (data.get("row3col5") != null) {
+      return true
+      } else return false
+    }
+    const objectToSend = {
+      "group_id": window.location.href.slice(-9),
+      "row1col1": row1col1(),
+      "row1col2": row1col2(),
+      "row1col3": row1col3(),
+      "row1col4": row1col4(),
+      "row1col5": row1col5(),
+      "row2col1": row2col1(),
+      "row2col2": row2col2(),
+      "row2col3": row2col3(),
+      "row2col4": row2col4(),
+      "row2col5": row2col5(),
+      "row3col1": row3col1(),
+      "row3col2": row3col2(),
+      "row3col3": row3col3(),
+      "row3col4": row3col4(),
+      "row3col5": row3col5()
+    };
+    this.postButtons(objectToSend)  
+  }
+  
+  postButtons = (objectToSend) => {
+    let url = apiUrl + "/buttons"
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(objectToSend),
+      headers: new Headers({
+        'Content-Type': 'application/json'
     })
+    }).then(res => res.json())
+    .catch(error => console.error('Error:', error))
   }
     
 
@@ -127,23 +284,24 @@ class Lodging extends Component {
     return (
 
       <div className="lodging">
-        <h2>Lodging</h2>
+        <h2>Lodging:</h2>
         <form className="submissionForm" onSubmit={this.onSubmit}>
           <div className="inputContainer">
-            <label>Insert link to lodging here</label>
+            <label>Insert link to lodging here:</label>
             <input className="linkField" type="text" name="bnbUrl"></input>
           </div>
           <input type="submit" value="Submit"></input>
         </form>    
-        <form className="radioForm">
-        <p>Select your preferred dates:</p>    
+        <form className="radioForm" onSubmit={this.onSubmitRadioForm}>
+        <p>Select your preferred accomodation:</p>    
         <table>
           <tbody>
             <tr>
-              <th >People</th>
+              <th>People</th>
               {this.listBnbs()}
             </tr> 
-            {this.getUserLines()}
+            {this.getUserLines(window.location.href.slice(-9))}
+            {this.finalRow()}
           </tbody>
         </table>
         </form>

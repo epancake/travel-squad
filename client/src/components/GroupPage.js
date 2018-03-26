@@ -30,6 +30,11 @@ class GroupPage extends Component {
   componentDidMount() {
     this.setState(() => {return {groupName: this.getGroupName()}})
     Modal.setAppElement('.App');
+    this.doOneReload()
+  }
+
+  doOneReload = () => {
+
   }
 
   getGroupName = () => {
@@ -117,7 +122,7 @@ class GroupPage extends Component {
         <input type="submit" value="Generate Email Invite" onClick={this.openSubmitModal}/>
         <Dates dates={this.props.dates} users={this.props.users}/>
         <Lodging airbnbs={this.props.airbnbs} users={this.props.users}/>
-        <Activities users={this.props.users}/>
+        <Activities users={this.props.users} activities={this.props.activities}/>
         <Chat/>
         
         <Modal

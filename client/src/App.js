@@ -15,10 +15,13 @@ class App extends Component {
       groups: [],
       dates: [],
       airbnbs: [],
+      activities: []
   }
 
   componentDidMount() {
     this.getData()
+    this.getActivities()
+
   }
 
   getData = () => {
@@ -30,6 +33,18 @@ class App extends Component {
       groups: res.groups,
       dates: res.dates,
       airbnbs: res.airbnb
+    })
+  })
+    .catch(error => console.error('Error:', error))
+    .then(response => console.log('Success:', this.state))
+    }
+    
+  getActivities = () => {
+    fetch(apiUrl + "/activities")
+    .then(res => res.json())
+    .then(res => {
+    this.setState({
+      activities: res.activities,
     })
   })
     .catch(error => console.error('Error:', error))
@@ -49,7 +64,8 @@ class App extends Component {
                airbnbs={this.state.airbnbs} 
                dates={this.state.dates} 
                users={this.state.users} 
-               groups={this.state.groups}/>} />
+               groups={this.state.groups}
+               activities={this.state.activities}/>} />
            </Switch>
          </div>
        </Router>

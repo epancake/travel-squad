@@ -89,10 +89,10 @@ class Activities extends Component {
     }
   
   suggestedActivities(){
-    return this.props.activities.map(date => {
-      if (date.group_id == window.location.href.slice(-9)) {
+    return this.props.activities.map(activity => {
+      if (activity.group_id == window.location.href.slice(-9)) {
         return (
-          <td key={date.id} >{date.dateSuggestion}</td>
+          <td key={activity.id} className="activityText">{activity.activitySuggestion}</td>
         )
       }
     })
@@ -244,7 +244,7 @@ class Activities extends Component {
         <form className="submissionForm" onSubmit={this.submitActivities}>
           <div className="inputContainer">
             <label>Suggest Activities: </label>
-            <input name="activity" type="text"></input>
+            <input name="activity" type="text" className="activityInput"></input>
           </div>
           <input type="submit"/>
         </form> 

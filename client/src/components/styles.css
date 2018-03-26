@@ -90,7 +90,6 @@ input[type="date"] {
 .linkField {
   width: 75vw
 }
-/*********Activities********/
 
 .bnbCard {
   align: center
@@ -111,6 +110,16 @@ img {
 .flexDiv {
   display: flex;
   justify-content: space-around;
+}
+
+/*********Activities********/
+
+.activityText {
+  text-align: center;
+}
+
+.activityInput {
+  width: 17rem;
 }
 
 /*********Chat********/

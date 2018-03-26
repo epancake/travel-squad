@@ -19,11 +19,11 @@ class Lodging extends Component {
   }
 
   componentDidMount() {
-    fetch(apiUrl + "/buttons")
+    fetch(apiUrl + "/bnbbuttons")
     .then(res => res.json())
     .then(res => {
     this.setState({
-      buttons: res.bnbButtons
+      buttons: res.bnbbuttons
     })
   })
   }
@@ -268,7 +268,7 @@ class Lodging extends Component {
   }
   
   postButtons = (objectToSend) => {
-    let url = apiUrl + "/buttons"
+    let url = apiUrl + "/bnbbuttons"
     fetch(url, {
       method: 'POST',
       body: JSON.stringify(objectToSend),
@@ -304,6 +304,7 @@ class Lodging extends Component {
             {this.finalRow()}
           </tbody>
         </table>
+        <input type="submit" value="Save Table"></input>
         </form>
       </div>
     )

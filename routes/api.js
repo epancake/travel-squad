@@ -57,6 +57,14 @@ router.get("/buttons", (request, response, next) => {
     .catch(next);
 });
 
+router.get("/activities", (request, response, next) => {
+  queries.list("activities")
+    .then(activities => {
+      response.json({ activities });
+    })
+    .catch(next);
+});
+
 router.get("/bnbbuttons", (request, response, next) => {
   queries.list("bnbbuttons")
     .then(bnbbuttons => {
@@ -122,6 +130,13 @@ router.post("/users", (request, response, next) => {
 router.post("/dates", (request, response, next) => {
   queries.create("dates", request.body).then(dates => {
     response.status(201).json({dates});
+  })
+    .catch(next);
+});
+
+router.post("/activities", (request, response, next) => {
+  queries.create("activities", request.body).then(activities => {
+    response.status(201).json({activities});
   })
     .catch(next);
 });

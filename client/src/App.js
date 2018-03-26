@@ -14,7 +14,7 @@ class App extends Component {
       users: [],
       groups: [],
       dates: [],
-      airbnbs: []
+      airbnbs: [],
   }
 
   componentDidMount() {

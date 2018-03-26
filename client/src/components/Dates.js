@@ -9,7 +9,8 @@ class Dates extends Component {
     super(props)
     
     this.state = {
-      dates: true
+      dates: true,
+      buttons: []
     }
   }
   
@@ -45,6 +46,26 @@ class Dates extends Component {
       )      
     }
     
+    isItChecked = (cellName) => {
+      fetch(apiUrl + "/buttons")
+      .then(res => res.json())
+      .then(res => {
+      this.setState({
+        buttons: res.buttons
+      })
+    })
+      .then(res => {
+        return this.state.buttons.map(button => {
+          if (button.group_id == window.location.href.slice(-9)) {
+            if (button.cellName == true) {
+              return true
+            } else return false
+          }
+        })
+      })
+      .catch(error => console.error('Error:', error))
+    }
+    
     getNum = (row) => {
       return this.props.dates.map(date => {
         if (date.group_id == window.location.href.slice(-9)) {
@@ -52,7 +73,7 @@ class Dates extends Component {
           return (
             <td key={Math.random()} className="radiotd">
             <div className="flexDiv">
-              <input type="radio" name={`row${row}col${numOfDates}`} id={`dateChoice${numOfDates}`} onChange={this.onSiteChanged} value=""/>
+              <input type="radio" checked={this.isItChecked(`row${row}col${numOfDates}`)} name={`row${row}col${numOfDates}`} id={`dateChoice${numOfDates}`} onChange={this.onSiteChanged} value=""/>
             </div>
             </td>
           )
@@ -123,72 +144,72 @@ class Dates extends Component {
         } else return false
       }
       const row1col2 = () => {
-        if (data.get("row1col1") != null) {
+        if (data.get("row1col2") != null) {
         return true
         } else return false
       }
       const row1col3 = () => {
-        if (data.get("row1col1") != null) {
+        if (data.get("row1col3") != null) {
         return true
         } else return false
       }
       const row1col4 = () => {
-        if (data.get("row1col1") != null) {
+        if (data.get("row1col4") != null) {
         return true
         } else return false
       }
       const row1col5 = () => {
-        if (data.get("row1col1") != null) {
+        if (data.get("row1col5") != null) {
         return true
         } else return false
       }
       const row2col1 = () => {
-        if (data.get("row1col1") != null) {
+        if (data.get("row2col1") != null) {
         return true
         } else return false
       }
       const row2col2 = () => {
-        if (data.get("row1col1") != null) {
+        if (data.get("row2col2") != null) {
         return true
         } else return false
       }
       const row2col3 = () => {
-        if (data.get("row1col1") != null) {
+        if (data.get("row2col3") != null) {
         return true
         } else return false
       }
       const row2col4 = () => {
-        if (data.get("row1col1") != null) {
+        if (data.get("row2col4") != null) {
         return true
         } else return false
       }
       const row2col5 = () => {
-        if (data.get("row1col1") != null) {
+        if (data.get("row2col5") != null) {
         return true
         } else return false
       }
       const row3col1 = () => {
-        if (data.get("row1col1") != null) {
+        if (data.get("row3col1") != null) {
         return true
         } else return false
       }
       const row3col2 = () => {
-        if (data.get("row1col1") != null) {
+        if (data.get("row3col2") != null) {
         return true
         } else return false
       }
       const row3col3 = () => {
-        if (data.get("row1col1") != null) {
+        if (data.get("row3col3") != null) {
         return true
         } else return false
       }
       const row3col4 = () => {
-        if (data.get("row1col1") != null) {
+        if (data.get("row3col4") != null) {
         return true
         } else return false
       }
       const row3col5 = () => {
-        if (data.get("row1col1") != null) {
+        if (data.get("row3col5") != null) {
         return true
         } else return false
       }
@@ -210,14 +231,15 @@ class Dates extends Component {
         "row3col4": row3col4(),
         "row3col5": row3col5()
       };
-      this.postButtons()  
+      console.log("ob", objectToSend)
+      this.postButtons(objectToSend)  
     }
     
-    postButtons = (user) => {
+    postButtons = (objectToSend) => {
       let url = apiUrl + "/buttons"
       fetch(url, {
         method: 'POST',
-        body: JSON.stringify(user),
+        body: JSON.stringify(objectToSend),
         headers: new Headers({
           'Content-Type': 'application/json'
       })

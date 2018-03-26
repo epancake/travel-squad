@@ -11,7 +11,7 @@ class Chat extends React.Component{
             messages: []
         };
 
-        this.socket = io('localhost:3000');
+        this.socket = io('https://travelsquadback.herokuapp.com');
         
         // process.env.PORT || 
 

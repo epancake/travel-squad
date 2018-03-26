@@ -69,9 +69,12 @@ class Dates extends Component {
         console.log('ls', lastSave)
         let cellName = `row${row}col${col}`
         console.log('cn', cellName)
-        if (lastSave[cellName] === true) {
-          return true
-        }
+        if (lastSave) {
+          if (lastSave[cellName] === true) {
+            return true
+          } 
+        } else return false
+
     }
     
     getNum = (row) => {

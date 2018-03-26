@@ -104,7 +104,7 @@ class Activities extends Component {
     const form = event.target;
     const data = new FormData(form);
     const activitiyToSend = ({
-      "activitySuggestion": data.get("activity")},
+      "activitySuggestion": data.get("activity"),
       "group_id": groupID
       })
     this.postDate(activitiyToSend)

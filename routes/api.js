@@ -49,6 +49,14 @@ router.get("/users", (request, response, next) => {
     .catch(next);
 });
 
+router.get("/buttons", (request, response, next) => {
+  queries.list("buttons")
+    .then(buttons => {
+      response.json({ buttons });
+    })
+    .catch(next);
+});
+
 router.get("/search/:url", (request, response, next) => {
   scraper.searchAir(request.params.url)
     .then(listings => {
@@ -98,6 +106,13 @@ router.post("/users", (request, response, next) => {
 router.post("/dates", (request, response, next) => {
   queries.create("dates", request.body).then(dates => {
     response.status(201).json({dates});
+  })
+    .catch(next);
+});
+
+router.post("/buttons", (request, response, next) => {
+  queries.create("buttons", request.body).then(buttons => {
+    response.status(201).json({buttons});
   })
     .catch(next);
 });

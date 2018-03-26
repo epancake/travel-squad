@@ -20,6 +20,12 @@ h1 {
   letter-spacing: 3pt
 }
 
+h2 {
+  font-size: 1.5rem;
+  background-color: lightblue;
+  padding: .5rem 1rem;
+}
+
 .memberForm {
   display: flex;
   flex-direction: column;
@@ -62,18 +68,16 @@ label, p {
   box-shadow: 5px 5px 5px rgb(91, 111, 122);
 }
 
-button, input[type="submit"] {
+.btn, button, input[type="submit"] {
   background-color: #62825e;
+  color: #ffffff;
   font-family: 'IBM Plex Sans Condensed', sans-serif;
   padding: .7rem 1rem .5rem 1rem;
   margin: .5rem;
   font-family: 'Neucha', cursive;
   letter-spacing: .5pt;
   font-size: 1rem;
-}
-
-input[type="text"] {
-  width: 15rem;
+  border-radius: 5pt;
 }
 
 .createGroup a {
@@ -89,4 +93,8 @@ input[type="text"] {
   padding: .5rem;
   border-radius: 5pt;
   color: #eae0d3;
+}
+
+.btn-primary {
+  margin: 0;
 }

@@ -81,7 +81,14 @@ class Lodging extends Component {
       if (bnb.group_id == window.location.href.slice(-9)) {
         numOfBnbs ++
         return (
-          <th key={bnb.id} >{bnb.bnbTitle} <img className="bnbimg" src={bnb.bnbImageSrc}/></th>
+          <th key={bnb.id} className="bnbCard">
+            <div className="bnbTitle">
+              <a href={bnb.bnbUrl}>{bnb.bnbTitle}</a>
+            </div>
+            <div className="flexDiv">
+              <a href={bnb.bnbUrl}><img className="bnbimg" src={bnb.bnbImageSrc}/></a>
+            </div>
+          </th>
         )
       }
     })
@@ -105,7 +112,11 @@ class Lodging extends Component {
       if (bnb.group_id == window.location.href.slice(-9)) {
         numOfBnbs ++
         return (
-          <td key={numOfBnbs}><input type="radio" id="dateChoice1" name="choice1" value=""/></td>
+          <td className="radiotd" key={numOfBnbs}>
+            <div className="flexDiv">
+              <input type="radio" id="dateChoice1" className="radio" name="choice1" value=""/>
+            </div>
+          </td>
         )
       }
     })
@@ -117,11 +128,15 @@ class Lodging extends Component {
 
       <div className="lodging">
         <h2>Lodging</h2>
-        <form onSubmit={this.onSubmit}>
-          <label>Insert link to lodging here</label>
-          <input type="text" name="bnbUrl"></input>
+        <form className="submissionForm" onSubmit={this.onSubmit}>
+          <div className="inputContainer">
+            <label>Insert link to lodging here</label>
+            <input className="linkField" type="text" name="bnbUrl"></input>
+          </div>
           <input type="submit" value="Submit"></input>
-        </form>        
+        </form>    
+        <form className="radioForm">
+        <p>Select your preferred dates:</p>    
         <table>
           <tbody>
             <tr>
@@ -131,6 +146,7 @@ class Lodging extends Component {
             {this.getUserLines()}
           </tbody>
         </table>
+        </form>
       </div>
     )
   }

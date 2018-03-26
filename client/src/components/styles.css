@@ -2,10 +2,18 @@
   display: none;
 }
 
+.dates, .lodging, .activities, .chat {
+  border: 1px solid grey;
+  margin: .5rem;
+}
+
+/*********Groups********/
+
 .invite-friends {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 1rem;
 }
 
 .invite-div {
@@ -15,37 +23,8 @@
   margin: .5rem;
 }
 
-.invite-friends {
-  padding: 1rem;
-}
-
-.dates, .lodging, .activities, .chat {
-  border: 1px solid grey;
-  margin: .5rem;
-  padding: 1rem;
-}
-
-.options {
-  display:grid;
-  grid-template-rows: 15% 10% 10% 10% 10% 10% 10%;
-  grid-template-columns: 34% 22% 22% 22%;
-  justify-items: center;
-}
-
-.gridcol1 {
-  grid-column-start: 1
-}
-
-.gridcol2 {
-  grid-column-start: 2
-}
-
-.gridcol3 {
-  grid-column-start: 3
-}
-
-.gridcol4 {
-  grid-column-start: 4
+.invite-form {
+  padding: 1rem 0 0 0;
 }
 
 .groupList {
@@ -56,23 +35,92 @@
 }
 
 .groupList ul {
-  list-style: disc;
+  padding: .25rem;
+}
+
+.groupList ul li {
+  padding: .25rem;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+}
+
+h3 {
+  font-size: 2rem;
+  color: #62825e;
+  padding: .5rem 0 0 0;
 }
 
 .instructions {
   padding: 1rem;
 }
 
-.person {
-  white-space: nowrap;
+/*********Dates********/
+
+.submissionForm {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+input[type="date"] {
+  width: 15rem;
+}
+
+.radioForm {
+  margin: 1rem;
+}
+
+/*********Lodging********/
+
+.linkField {
+  width: 75vw
+}
+/*********Activities********/
+
+.bnbCard {
+  align: center
 }
 
 .bnbimg {
   width: 8rem
 }
 
+.bnbTitle {
+  text-align: center;
+}
+
+img {
+  float: center;
+}
+
+.flexDiv {
+  display: flex;
+  justify-content: space-around;
+}
+
+/*********Chat********/
+
+.person {
+  white-space: nowrap;
+}
+
 .chat {
   box-sizing: border-box;
+}
+
+.card {
+  width: 80vw
 }
 
 .chat form {
@@ -117,8 +165,8 @@
   background:
   linear-gradient(
     0deg,
-    hsla(0,0%,100%, .3) 0%,
-    hsla(0,0%,100%, .7) 100%),
+    hsla(0,0%,100%, .7) 0%,
+    hsla(0,0%,100%, .9) 100%),
     center/200% url("../assets/beach.jpg");
   background-repeat: repeat;
   background-position: center;

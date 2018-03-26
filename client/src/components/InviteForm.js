@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const apiUrl = "https://travelsquadback.herokuapp.com"
+const apiUrl = "https://travelsquadback.herokuapp.com/api"
 
 class InviteForm extends Component {
 
@@ -12,6 +12,7 @@ class InviteForm extends Component {
 
   onSubmitUser(event) {
     event.preventDefault()
+    event.stopPropagation()
     const groupID = window.location.href.slice(-9)
     const form = event.target;
     const data = new FormData(form);
@@ -41,7 +42,7 @@ class InviteForm extends Component {
   render() {
   return (
     <div className="form">
-      <p>Enter info about travelers other than yourself.</p>
+      <p>Enter new traveler info</p>
       <form className="memberForm" onSubmit={this.onSubmitUser}>
         <section className="person-entry">
           <label>Traveler First Name:</label>

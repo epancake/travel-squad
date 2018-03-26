@@ -7,6 +7,18 @@
   margin: .5rem;
 }
 
+.memberForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.person-entry {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 /*********Groups********/
 
 .invite-friends {

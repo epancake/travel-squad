@@ -8,12 +8,13 @@ class Lodging extends Component {
 
   constructor(props){
     super(props)
-    
+
     this.state = {
       bnb1Title: "",
       bnb1Url: "",
       bnb1ImageSrc: "",
-      buttons: []
+      buttons: [],
+      inputField: "",
     }
 
   }
@@ -81,9 +82,11 @@ class Lodging extends Component {
           'Content-Type': 'application/json'
       })
       }).then(res => res.json())
+      .then(res => {this.setState({inputField: ""}); return res})
+      .then(res => this.props.reFetchData())
       .catch(error => console.error('Error:', error))
   }
-  
+
   getUserLines(id){
     let row = 0
     return this.props.users.map(user => {
@@ -98,7 +101,7 @@ class Lodging extends Component {
       }
     })
   }
-  
+
   finalRow(){
       let usersHere = 0
       this.props.users.map(user => {
@@ -113,7 +116,7 @@ class Lodging extends Component {
           </tr>
         )
     }
-    
+
     isItChecked = (row, col) => {
         let buttonsArray = []
         this.state.buttons.map(button => {
@@ -126,11 +129,11 @@ class Lodging extends Component {
         if (lastSave) {
           if (lastSave[cellName] === true) {
             return true
-          } 
+          }
         } else return false
 
     }
-    
+
     getNum = (row) => {
       numOfBnbs = 0
       return this.props.airbnbs.map(bnb => {
@@ -148,8 +151,8 @@ class Lodging extends Component {
         }
       })
     }
-  
-  
+
+
   listBnbs = () => {
     return this.props.airbnbs.map(bnb => {
       if (bnb.group_id == window.location.href.slice(-9)) {
@@ -166,7 +169,7 @@ class Lodging extends Component {
       }
     })
   }
-  
+
   onSubmitRadioForm = (event) => {
     event.preventDefault()
     const form = event.target;
@@ -264,9 +267,9 @@ class Lodging extends Component {
       "row3col4": row3col4(),
       "row3col5": row3col5()
     };
-    this.postButtons(objectToSend)  
+    this.postButtons(objectToSend)
   }
-  
+
   postButtons = (objectToSend) => {
     let url = apiUrl + "/bnbbuttons"
     fetch(url, {
@@ -278,7 +281,11 @@ class Lodging extends Component {
     }).then(res => res.json())
     .catch(error => console.error('Error:', error))
   }
-    
+
+  handleInputChange = (e) => {
+    this.setState({inputField: e.target.value});
+  }
+
 
   render() {
     return (
@@ -288,18 +295,18 @@ class Lodging extends Component {
         <form className="submissionForm" onSubmit={this.onSubmit}>
           <div className="inputContainer">
             <label>Insert link to lodging here:</label>
-            <input className="linkField" type="text" name="bnbUrl"></input>
+            <input value={this.state.inputField} className="linkField" type="text" name="bnbUrl" onChange={this.handleInputChange}></input>
           </div>
           <input type="submit" value="Submit"></input>
-        </form>    
+        </form>
         <form className="radioForm" onSubmit={this.onSubmitRadioForm}>
-        <p>Select your preferred accomodation:</p>    
+        <p>Select your preferred accomodation:</p>
         <table>
           <tbody>
             <tr>
               <th>People</th>
               {this.listBnbs()}
-            </tr> 
+            </tr>
             {this.getUserLines(window.location.href.slice(-9))}
             {this.finalRow()}
           </tbody>

@@ -11,8 +11,6 @@ class NewGroup extends Component {
     this.submitLeader = this.submitLeader.bind(this);
     this.postGroup = this.postGroup.bind(this)
     this.postLeader = this.postLeader.bind(this)
-    console.log("monday props", this.props)
-
     this.getData()
     this.getId()
   }
@@ -38,10 +36,10 @@ class NewGroup extends Component {
   onSubmit = (event) => {
     console.log('submitted')
     event.preventDefault()
-    Promise.all([
-      this.submitGroup(event),
-      this.submitLeader(event)
-    ]).then(results => {
+    this.submitGroup(event)
+    .then(response => this.submitLeader(event))
+    .then(response => this.props.onNewGroup())
+    .then(results => {
     window.location.hash = "/group/" + this.newID
     })
   }
@@ -72,7 +70,8 @@ class NewGroup extends Component {
   }
 
   submitLeader(event) {
-    const form = event.target;
+    const form = this.refs.form;
+    console.log("form", form)
     const data = new FormData(form);
     const mainUserToSend = ({
       "email": data.get("main-email"),
@@ -104,7 +103,7 @@ class NewGroup extends Component {
       </header>
         <div className="form">
           <p className="instructions">Enter details about your group.</p>
-          <form className="memberForm" onSubmit={this.onSubmit}>
+          <form ref="form" className="memberForm" onSubmit={this.onSubmit}>
             <label>Group Name:</label>
             <input type="text" name="groupName"/>
             <section className="person-entry">

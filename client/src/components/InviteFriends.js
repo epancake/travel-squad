@@ -41,19 +41,20 @@ class InviteFriends extends React.Component {
           <p>Group Members:</p>
           <ul>{this.getUsers()}</ul>
         </div>
-        <section className="invite-friends" onClick={(e)=>{this.setState({ isOpened: !this.state.isOpened })}}>
-        <p>Add Group Members</p>
-        <h3 className={this.state.isOpened ? "hidden" : ""}>
-          <i className="fas fa-plus-square"></i>
-        </h3>
-        <h3 className={!this.state.isOpened ? "hidden" : ""}>
-          <i className="fas fa-minus-square"></i>
-        </h3>
-        <Collapse className="invite-form" isOpened={this.state.isOpened}>
-          <InviteForm key="1" users={this.props.users}/>
-        </Collapse>
-        </section>
-        
+        <div>
+          <section className="invite-friends" onClick={(e)=>{this.setState({ isOpened: !this.state.isOpened })}}>
+          <p>Add Group Members</p>
+          <h3 className={this.state.isOpened ? "hidden" : ""}>
+            <i className="fas fa-plus-square"></i>
+          </h3>
+          <h3 className={!this.state.isOpened ? "hidden" : ""}>
+            <i className="fas fa-minus-square"></i>
+          </h3>
+          </section>
+          <Collapse className="invite-form" isOpened={this.state.isOpened}>
+            <InviteForm key="1"  reFetchData={this.props.reFetchData} users={this.props.users}/>
+          </Collapse>
+        </div>
 
         </div>
 

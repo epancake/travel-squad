@@ -116,12 +116,13 @@ class GroupPage extends Component {
         <header className="landing-header">
             <h1>{this.getGroupName()}</h1>
         </header>
-        <InviteFriends users={this.props.users} status={this.state.inviteInfo} currentGroup={currentGroup}/>
+        <InviteFriends reFetchData={this.props.reFetchData} users={this.props.users} status={this.state.inviteInfo} currentGroup={currentGroup}/>
         <input type="submit" value="Generate Email Invite" onClick={this.openSubmitModal}/>
         <Dates dates={this.props.dates} users={this.props.users}/>
-        <Lodging airbnbs={this.props.airbnbs} users={this.props.users}/>
+        <Lodging reFetchData={this.props.reFetchData} airbnbs={this.props.airbnbs} users={this.props.users}/>
         <Activities users={this.props.users} activities={this.props.activities}/>
         <Chat/>
+
 
         <Modal
           isOpen={this.state.submitModalIsOpen}

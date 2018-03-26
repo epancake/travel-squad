@@ -8,6 +8,12 @@ class InviteForm extends Component {
     super(props);
     this.onSubmitUser = this.onSubmitUser.bind(this);
     this.postUser = this.postUser.bind(this);
+
+    this.state = {
+      inputField1: "",
+      inputField2: "",
+      inputField3: ""
+    }
   }
 
   onSubmitUser(event) {
@@ -36,7 +42,21 @@ class InviteForm extends Component {
           'Content-Type': 'application/json'
       })
       }).then(res => res.json())
+      .then(res => this.props.reFetchData())
+      .then(res => {this.setState({inputField1: "", inputField2: "", inputField3: ""}); return res})
       .catch(error => console.error('Error:', error))
+    }
+
+    handleInputChange1 = (e) => {
+      this.setState({inputField1: e.target.value});
+    }
+
+    handleInputChange2 = (e) => {
+      this.setState({inputField2: e.target.value});
+    }
+
+    handleInputChange3 = (e) => {
+      this.setState({inputField3: e.target.value});
     }
 
   render() {
@@ -46,11 +66,11 @@ class InviteForm extends Component {
       <form className="memberForm" onSubmit={this.onSubmitUser}>
         <section className="person-entry">
           <label>Traveler First Name:</label>
-          <input type="text" name="main-fname"/>
+          <input value={this.state.inputField1} type="text" name="main-fname" onChange={this.handleInputChange1}/>
           <label>Traveler Last Name:</label>
-          <input type="text" name="main-lname"/>
+          <input value={this.state.inputField2} type="text" name="main-lname" onChange={this.handleInputChange2}/>
           <label>Traveler Email:</label>
-          <input type="text" name="main-email"/>
+          <input value={this.state.inputField3} type="text" name="main-email" onChange={this.handleInputChange3}/>
         </section>
         <input className="formEnd" type="submit" value="Submit Traveler">
         </input>

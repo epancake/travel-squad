@@ -26,18 +26,7 @@ h2 {
   padding: .5rem 1rem;
 }
 
-.memberForm {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
 
-.person-entry {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  padding: 1rem 0;
-}
 
 .memberForm label {
   margin: 1rem 1rem 0rem 1rem;

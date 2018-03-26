@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch} from "react-router-dom";
 import './App.css';
 import NewGroup from "./components/NewGroup.js"
-import About from "./components/About.js"
 import Landing from "./components/Landing.js"
 import GroupPage from "./components/GroupPage.js"
 
@@ -25,7 +24,7 @@ class App extends Component {
   }
 
   getData = () => {
-    fetch(apiUrl)
+    return fetch(apiUrl)
     .then(res => res.json())
     .then(res => {
     this.setState({
@@ -60,6 +59,7 @@ class App extends Component {
              <Route path="/new" render={(props)=><NewGroup
                users={this.state.users}
                groups={this.state.groups}
+               onNewGroup={this.getData}
                {...props} />}
             />
              <Route path="/group/:id" render={(props)=><GroupPage
@@ -68,6 +68,7 @@ class App extends Component {
                users={this.state.users}
                groups={this.state.groups}
                activities={this.state.activities}
+               reFetchData={this.getData}
                {...props} />} />
            </Switch>
          </div>

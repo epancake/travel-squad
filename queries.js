@@ -11,6 +11,7 @@ module.exports = {
     return database(table)
       .insert(item)
       .returning("*")
+      .then(record => {console.log("record", record); return record})
       .then(record => record[0])
   },
   update(table, id, question) {

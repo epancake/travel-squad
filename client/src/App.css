@@ -13,6 +13,15 @@
   align-items: center;
 }
 
+.landing-footer {
+  background-color: #62825e;
+  height: 8vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
 h1 {
   font-family: 'Neucha', cursive;
   color: #eae0d3;
@@ -28,9 +37,7 @@ h2 {
 
 
 
-.memberForm label {
-  margin: 1rem 1rem 0rem 1rem;
-}
+
 
 .form {
   display: flex;
@@ -39,7 +46,7 @@ h2 {
 }
 
 label, p {
-  font-family: 'Neucha', cursive;
+  font-family: 'Padauk', sans-serif;
   letter-spacing: .5pt;
   align-self: center
 }
@@ -59,8 +66,7 @@ label, p {
 
 .btn, button, input[type="submit"] {
   background-color: #62825e;
-  color: #ffffff;
-  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  color: #eae0d3;
   padding: .7rem 1rem .5rem 1rem;
   margin: .5rem;
   font-family: 'Neucha', cursive;
@@ -86,4 +92,13 @@ label, p {
 
 .btn-primary {
   margin: 0;
+}
+
+small {
+    color: #eae0d3;
+    font-family: 'Neucha', cursive;
+}
+
+p {
+  font-size: 1.25rem;
 }

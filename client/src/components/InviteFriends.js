@@ -38,7 +38,7 @@ class InviteFriends extends React.Component {
         <h2>Group:</h2>
         <div className="container">
         <div className="groupList">
-          <p>Group Members:</p>
+          <p>Group Members</p>
           <ul>{this.getUsers()}</ul>
         </div>
         <div>

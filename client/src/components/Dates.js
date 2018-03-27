@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 
 const apiUrl = "https://travelsquadback.herokuapp.com/api"
 let numOfDates = 0
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; 
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 class Dates extends Component {
-  
+
   constructor(props) {
     super(props)
-  
+
     this.state = {
       buttons: [],
     }
   }
-  
+
   componentDidMount() {
     fetch(apiUrl + "/buttons")
     .then(res => res.json())
@@ -38,7 +38,7 @@ class Dates extends Component {
         }
       })
     }
-    
+
     finalRow(){
       let usersHere = 0
       this.props.users.map(user => {
@@ -53,7 +53,7 @@ class Dates extends Component {
           </tr>
         )
     }
-    
+
     isItChecked = (row, col) => {
         let buttonsArray = []
         this.state.buttons.map(button => {
@@ -66,11 +66,11 @@ class Dates extends Component {
         if (lastSave) {
           if (lastSave[cellName] === true) {
             return true
-          } 
+          }
         } else return false
 
     }
-    
+
     getNum = (row) => {
       numOfDates = 0
       return this.props.dates.map(date => {
@@ -88,7 +88,7 @@ class Dates extends Component {
         }
       })
     }
-  
+
   suggestedDates(){
     return this.props.dates.map(date => {
       if (date.group_id == window.location.href.slice(-9)) {
@@ -98,7 +98,7 @@ class Dates extends Component {
       }
     })
   }
-    
+
   submitDates = (event) => {
     event.preventDefault()
     const groupID = window.location.href.slice(-9)
@@ -139,7 +139,7 @@ class Dates extends Component {
       .then(res => window.location.reload())
       .catch(error => console.error('Error:', error))
     }
-    
+
     onSubmitRadioForm = (event) => {
       event.preventDefault()
       const form = event.target;
@@ -237,9 +237,9 @@ class Dates extends Component {
         "row3col4": row3col4(),
         "row3col5": row3col5()
       };
-      this.postButtons(objectToSend)  
+      this.postButtons(objectToSend)
     }
-    
+
     postButtons = (objectToSend) => {
       let url = apiUrl + "/buttons"
       fetch(url, {
@@ -257,7 +257,7 @@ class Dates extends Component {
 
       <div className="dates">
         <h2>Dates:</h2>
-        
+
         <form className="submissionForm" onSubmit={this.submitDates}>
           <div className="inputContainer">
             <label>Suggest Dates: </label>
@@ -266,7 +266,7 @@ class Dates extends Component {
             <input name="dateEnd" type="date"></input>
           </div>
           <input type="submit"/>
-        </form> 
+        </form>
         <form className="radioForm" onSubmit={this.onSubmitRadioForm}>
           <p>Select your preferred dates:</p>
           <table>
@@ -274,10 +274,10 @@ class Dates extends Component {
               <tr>
                 <th >People</th>
                 {this.suggestedDates()}
-              </tr> 
+              </tr>
               {this.getUserLines(window.location.href.slice(-9))}
               {this.finalRow()}
-            </tbody>      
+            </tbody>
           </table>
           <input type="submit" value="Save Table"></input>
         </form>

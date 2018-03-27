@@ -113,7 +113,7 @@ class GroupPage extends Component {
     return (
 
       <div id="choices-section">
-        <header className="landing-header">
+        <header className="landing-header fadeIn">
             <h1>{this.getGroupName()}</h1>
         </header>
         <InviteFriends reFetchData={this.props.reFetchData} users={this.props.users} status={this.state.inviteInfo} currentGroup={currentGroup}/>
@@ -122,6 +122,9 @@ class GroupPage extends Component {
         <Lodging reFetchData={this.props.reFetchData} airbnbs={this.props.airbnbs} users={this.props.users}/>
         <Activities users={this.props.users} activities={this.props.activities}/>
         <Chat/>
+        <div className="landing-footer">
+            <small>&copy; 2018 Emily Pancake</small>
+        </div>
 
 
         <Modal

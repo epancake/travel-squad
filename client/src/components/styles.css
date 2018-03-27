@@ -13,6 +13,10 @@
   justify-content: space-around;
 }
 
+.memberForm label {
+  margin: .5rem 1rem 0rem 1rem;
+}
+
 .person-entry {
   display: flex;
   flex-direction: column;
@@ -35,8 +39,9 @@
   margin: .5rem;
 }
 
-.invite-form {
-  padding: 1rem 0 0 0;
+input[type="text"], input[type="date"]{
+  height: 2rem;
+  padding: 0 .25rem;
 }
 
 .groupList {
@@ -47,7 +52,7 @@
 }
 
 .groupList ul {
-  padding: .25rem;
+  padding: .5rem .25rem;
 }
 
 .groupList ul li {
@@ -91,6 +96,7 @@ h3 {
 
 input[type="date"] {
   width: 15rem;
+  margin-top: .5rem;
 }
 
 .radioForm {
@@ -100,7 +106,8 @@ input[type="date"] {
 /*********Lodging********/
 
 .linkField {
-  width: 75vw
+  width: 75vw;
+  margin-top: .5rem
 }
 
 .bnbCard {
@@ -124,6 +131,49 @@ img {
   justify-content: space-around;
 }
 
+@keyframes swing {
+  20% {
+    transform: rotate3d(0, 0, 1, 15deg);
+  }
+
+  40% {
+    transform: rotate3d(0, 0, 1, -10deg);
+  }
+
+  60% {
+    transform: rotate3d(0, 0, 1, 5deg);
+  }
+
+  80% {
+    transform: rotate3d(0, 0, 1, -5deg);
+  }
+
+  to {
+    transform: rotate3d(0, 0, 1, 0deg);
+  }
+}
+
+.swing {
+  transform-origin: top center;
+  animation-name: swing;
+  animation-duration: 2s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+  animation-duration: 4s;
+}
+
 /*********Activities********/
 
 .activityText {
@@ -132,12 +182,14 @@ img {
 
 .activityInput {
   width: 17rem;
+  margin-top: .5rem;
 }
 
 /*********Chat********/
 
 .person {
   white-space: nowrap;
+  padding: .35rem 0;
 }
 
 .chat {
@@ -205,7 +257,7 @@ img {
 }
 
 table {
-    font-family: arial, sans-serif;
+    font-family: 'Padauk', sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
@@ -223,3 +275,5 @@ tr:nth-child(even) {
 .userlist {
   padding: 1rem .5rem
 }
+
+/*checkboxes*/

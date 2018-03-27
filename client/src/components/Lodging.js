@@ -162,7 +162,7 @@ class Lodging extends Component {
               <a href={bnb.bnbUrl}>{bnb.bnbTitle}</a>
             </div>
             <div className="flexDiv">
-              <a href={bnb.bnbUrl}><img className="bnbimg" src={bnb.bnbImageSrc}/></a>
+              <a href={bnb.bnbUrl}><img className="bnbimg swing fadeIn" src={bnb.bnbImageSrc}/></a>
             </div>
           </th>
         )

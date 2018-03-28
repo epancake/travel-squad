@@ -56,11 +56,11 @@ input[type="text"], input[type="date"]{
 }
 
 .groupList ul {
-  padding: .5rem .25rem;
+  padding: .75rem .25rem;
 }
 
 .groupList ul li {
-  padding: .25rem;
+  padding: .40rem;
 }
 
 .container {

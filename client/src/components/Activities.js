@@ -4,15 +4,15 @@ const apiUrl = "https://travelsquadback.herokuapp.com/api"
 let numOfActivities = 0
 
 class Activities extends Component {
-  
+
   constructor(props) {
     super(props)
-  
+
     this.state = {
       buttons: [],
     }
   }
-  
+
   componentDidMount() {
     fetch(apiUrl + "/buttons")
     .then(res => res.json())
@@ -37,7 +37,7 @@ class Activities extends Component {
         }
       })
     }
-    
+
     finalRow(){
       let usersHere = 0
       this.props.users.map(user => {
@@ -52,7 +52,7 @@ class Activities extends Component {
           </tr>
         )
     }
-    
+
     isItChecked = (row, col) => {
         let buttonsArray = []
         this.state.buttons.map(button => {
@@ -65,11 +65,11 @@ class Activities extends Component {
         if (lastSave) {
           if (lastSave[cellName] === true) {
             return true
-          } 
+          }
         } else return false
 
     }
-    
+
     getNum = (row) => {
       numOfActivities = 0
       return this.props.activities.map(date => {
@@ -87,7 +87,7 @@ class Activities extends Component {
         }
       })
     }
-  
+
   suggestedActivities(){
     return this.props.activities.map(activity => {
       if (activity.group_id == window.location.href.slice(-9)) {
@@ -97,7 +97,7 @@ class Activities extends Component {
       }
     })
   }
-    
+
   submitActivities = (event) => {
     event.preventDefault()
     const groupID = window.location.href.slice(-9)
@@ -122,7 +122,7 @@ class Activities extends Component {
       .then(res => window.location.reload())
       .catch(error => console.error('Error:', error))
     }
-    
+
     onSubmitRadioForm = (event) => {
       event.preventDefault()
       const form = event.target;
@@ -202,6 +202,81 @@ class Activities extends Component {
         return true
         } else return false
       }
+      const row4col1 = () => {
+        if (data.get("row4col1") != null) {
+        return true
+        } else return false
+      }
+      const row4col2 = () => {
+        if (data.get("row4col2") != null) {
+        return true
+        } else return false
+      }
+      const row4col3 = () => {
+        if (data.get("row4col3") != null) {
+        return true
+        } else return false
+      }
+      const row4col4 = () => {
+        if (data.get("row4col4") != null) {
+        return true
+        } else return false
+      }
+      const row4col5 = () => {
+        if (data.get("row4col5") != null) {
+        return true
+        } else return false
+      }
+      const row5col1 = () => {
+        if (data.get("row5col1") != null) {
+        return true
+        } else return false
+      }
+      const row5col2 = () => {
+        if (data.get("row5col2") != null) {
+        return true
+        } else return false
+      }
+      const row5col3 = () => {
+        if (data.get("row5col3") != null) {
+        return true
+        } else return false
+      }
+      const row5col4 = () => {
+        if (data.get("row5col4") != null) {
+        return true
+        } else return false
+      }
+      const row5col5 = () => {
+        if (data.get("row5col5") != null) {
+        return true
+        } else return false
+      }
+      const row6col1 = () => {
+        if (data.get("row6col1") != null) {
+        return true
+        } else return false
+      }
+      const row6col2 = () => {
+        if (data.get("row6col2") != null) {
+        return true
+        } else return false
+      }
+      const row6col3 = () => {
+        if (data.get("row6col3") != null) {
+        return true
+        } else return false
+      }
+      const row6col4 = () => {
+        if (data.get("row6col4") != null) {
+        return true
+        } else return false
+      }
+      const row6col5 = () => {
+        if (data.get("row6col5") != null) {
+        return true
+        } else return false
+      }
       const objectToSend = {
         "group_id": window.location.href.slice(-9),
         "row1col1": row1col1(),
@@ -218,13 +293,28 @@ class Activities extends Component {
         "row3col2": row3col2(),
         "row3col3": row3col3(),
         "row3col4": row3col4(),
-        "row3col5": row3col5()
+        "row3col5": row3col5(),
+        "row4col1": row4col1(),
+        "row4col2": row4col2(),
+        "row4col3": row4col3(),
+        "row4col4": row4col4(),
+        "row4col5": row4col5(),
+        "row5col1": row5col1(),
+        "row5col2": row5col2(),
+        "row5col3": row5col3(),
+        "row5col4": row5col4(),
+        "row5col5": row5col5(),
+        "row6col1": row6col1(),
+        "row6col2": row6col2(),
+        "row6col3": row6col3(),
+        "row6col4": row6col4(),
+        "row6col5": row6col5()
       };
-      this.postButtons(objectToSend)  
+      this.postButtons(objectToSend)
     }
-    
+
     postButtons = (objectToSend) => {
-      let url = apiUrl + "/buttons"
+      let url = apiUrl + "/activitiesbuttons"
       fetch(url, {
         method: 'POST',
         body: JSON.stringify(objectToSend),
@@ -240,14 +330,14 @@ class Activities extends Component {
 
       <div className="activities">
         <h2>Activities:</h2>
-        
+
         <form className="submissionForm" onSubmit={this.submitActivities}>
           <div className="inputContainer">
             <label>Suggest Activities: </label>
             <input name="activity" type="text" className="activityInput"></input>
           </div>
           <input type="submit"/>
-        </form> 
+        </form>
         <form className="radioForm" onSubmit={this.onSubmitRadioForm}>
           <p>Select your preferred activities:</p>
           <table>
@@ -255,10 +345,10 @@ class Activities extends Component {
               <tr>
                 <th >People</th>
                 {this.suggestedActivities()}
-              </tr> 
+              </tr>
               {this.getUserLines(window.location.href.slice(-9))}
               {this.finalRow()}
-            </tbody>      
+            </tbody>
           </table>
           <input type="submit" value="Save Table"></input>
         </form>

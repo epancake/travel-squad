@@ -36,17 +36,22 @@ h2 {
 }
 
 
-
+.main {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
 
 
 .form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 80vh;
 }
 
 label, p {
-  font-family: 'Padauk', sans-serif;
+  font-family: 'Lora', serif;
   letter-spacing: .5pt;
   align-self: center
 }

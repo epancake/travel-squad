@@ -104,19 +104,18 @@ class NewGroup extends Component {
         <div className="form">
           <p className="instructions">Enter details about your group.</p>
           <form ref="form" className="memberForm" onSubmit={this.onSubmit}>
-            <label>Group Name:</label>
-            <input type="text" name="groupName"/>
+            <input placeholder="Group Name" type="text" name="groupName"/>
             <section className="person-entry">
-              <label>Your First Name:</label>
-              <input type="text" name="main-fname"/>
-              <label>Your Last Name:</label>
-              <input type="text" name="main-lname"/>
-              <label>Your Email:</label>
-              <input type="text" name="main-email"/>
+              <input placeholder="Your First Name" type="text" name="main-fname"/>
+              <input placeholder="Your Last Name" type="text" name="main-lname"/>
+              <input placeholder="Your Email" type="text" name="main-email"/>
             </section>
             <input className="formEnd" type="submit" value="Continue">
             </input>
           </form>
+        </div>
+        <div className="landing-footer">
+            <small>&copy; 2018 Emily Pancake</small>
         </div>
       </div>
     )

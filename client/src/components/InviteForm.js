@@ -65,12 +65,9 @@ class InviteForm extends Component {
       <p>Enter new traveler info</p>
       <form className="memberForm" onSubmit={this.onSubmitUser}>
         <section className="person-entry">
-          <label>Traveler First Name:</label>
-          <input value={this.state.inputField1} type="text" name="main-fname" onChange={this.handleInputChange1}/>
-          <label>Traveler Last Name:</label>
-          <input value={this.state.inputField2} type="text" name="main-lname" onChange={this.handleInputChange2}/>
-          <label>Traveler Email:</label>
-          <input value={this.state.inputField3} type="text" name="main-email" onChange={this.handleInputChange3}/>
+          <input placeholder="Traveler First Name" value={this.state.inputField1} type="text" name="main-fname" onChange={this.handleInputChange1}/>
+          <input placeholder="Traveler Last Name" value={this.state.inputField2} type="text" name="main-lname" onChange={this.handleInputChange2}/>
+          <input placeholder="Traveler Email" value={this.state.inputField3} type="text" name="main-email" onChange={this.handleInputChange3}/>
         </section>
         <input className="formEnd" type="submit" value="Submit Traveler">
         </input>

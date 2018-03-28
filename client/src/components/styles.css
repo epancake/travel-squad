@@ -44,6 +44,10 @@ input[type="text"], input[type="date"]{
   padding: 0 .25rem;
 }
 
+.memberForm input {
+  margin: .5rem
+}
+
 .groupList {
   display: flex;
   flex-direction: column;
@@ -257,7 +261,7 @@ img {
 }
 
 table {
-    font-family: 'Padauk', sans-serif;
+    font-family: 'Lora', serif;
     border-collapse: collapse;
     width: 100%;
 }

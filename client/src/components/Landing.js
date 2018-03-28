@@ -12,9 +12,14 @@ class Landing extends Component {
             <h1>TravelSquad</h1>
           </Link>
         </header>
+        <div className="main">
         <button className="createGroup">
           <Link to="/new">Create Group</Link>
         </button>
+        </div>
+        <div className="landing-footer">
+            <small>&copy; 2018 Emily Pancake</small>
+        </div>
       </div>
     )
   }

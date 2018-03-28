@@ -219,6 +219,81 @@ class Dates extends Component {
         return true
         } else return false
       }
+      const row4col1 = () => {
+        if (data.get("row4col1") != null) {
+        return true
+        } else return false
+      }
+      const row4col2 = () => {
+        if (data.get("row4col2") != null) {
+        return true
+        } else return false
+      }
+      const row4col3 = () => {
+        if (data.get("row4col3") != null) {
+        return true
+        } else return false
+      }
+      const row4col4 = () => {
+        if (data.get("row4col4") != null) {
+        return true
+        } else return false
+      }
+      const row4col5 = () => {
+        if (data.get("row4col5") != null) {
+        return true
+        } else return false
+      }
+      const row5col1 = () => {
+        if (data.get("row5col1") != null) {
+        return true
+        } else return false
+      }
+      const row5col2 = () => {
+        if (data.get("row5col2") != null) {
+        return true
+        } else return false
+      }
+      const row5col3 = () => {
+        if (data.get("row5col3") != null) {
+        return true
+        } else return false
+      }
+      const row5col4 = () => {
+        if (data.get("row5col4") != null) {
+        return true
+        } else return false
+      }
+      const row5col5 = () => {
+        if (data.get("row5col5") != null) {
+        return true
+        } else return false
+      }
+      const row6col1 = () => {
+        if (data.get("row5col1") != null) {
+        return true
+        } else return false
+      }
+      const row6col2 = () => {
+        if (data.get("row6col2") != null) {
+        return true
+        } else return false
+      }
+      const row6col3 = () => {
+        if (data.get("row6col3") != null) {
+        return true
+        } else return false
+      }
+      const row6col4 = () => {
+        if (data.get("row6col4") != null) {
+        return true
+        } else return false
+      }
+      const row6col5 = () => {
+        if (data.get("row6col5") != null) {
+        return true
+        } else return false
+      }
       const objectToSend = {
         "group_id": window.location.href.slice(-9),
         "row1col1": row1col1(),
@@ -235,7 +310,22 @@ class Dates extends Component {
         "row3col2": row3col2(),
         "row3col3": row3col3(),
         "row3col4": row3col4(),
-        "row3col5": row3col5()
+        "row3col5": row3col5(),
+        "row4col1": row3col1(),
+        "row4col2": row3col2(),
+        "row4col3": row3col3(),
+        "row4col4": row3col4(),
+        "row4col5": row3col5(),
+        "row5col1": row3col1(),
+        "row5col2": row3col2(),
+        "row5col3": row3col3(),
+        "row5col4": row3col4(),
+        "row5col5": row3col5(),
+        "row6col1": row3col1(),
+        "row6col2": row3col2(),
+        "row6col3": row3col3(),
+        "row6col4": row3col4(),
+        "row6col5": row3col5()
       };
       this.postButtons(objectToSend)
     }

@@ -19,6 +19,21 @@ exports.up = function(knex, Promise) {
     table.boolean("row3col3");
     table.boolean("row3col4");
     table.boolean("row3col5");
+    table.boolean("row4col1");
+    table.boolean("row4col2");
+    table.boolean("row4col3");
+    table.boolean("row4col4");
+    table.boolean("row4col5");
+    table.boolean("row5col1");
+    table.boolean("row5col2");
+    table.boolean("row5col3");
+    table.boolean("row5col4");
+    table.boolean("row5col5");
+    table.boolean("row6col1");
+    table.boolean("row6col2");
+    table.boolean("row6col3");
+    table.boolean("row6col4");
+    table.boolean("row6col5");
   });
 };
 

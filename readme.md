@@ -6,7 +6,7 @@ Streamline Group Travel
 [Deployed Backend Link](https://travel-squad.club/api)
 
 <div>
-  <img width="476" alt="screen shot" src="./client/src/assets/LandingScreenshot.png">
+  <img width="476" alt="screen shot" src="./client/public/LandingScreenshot.png">
 </div>
 
 ## App Description

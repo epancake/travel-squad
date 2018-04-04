@@ -3,16 +3,47 @@ import React, { Component } from 'react';
 const apiUrl = "https://travelsquadback.herokuapp.com/api"
 
 class NewGroup extends Component {
-
-  componentDidMount() {
+  
+  constructor(props){
+    super(props)
+    this.state = {
+      groupName: "",
+      fName: "",
+      lName: "",
+      email: "",
+    }
+    
     this.onSubmit = this.onSubmit.bind(this);
     this.getData = this.getData.bind(this);
     this.submitGroup = this.submitGroup.bind(this);
     this.submitLeader = this.submitLeader.bind(this);
     this.postGroup = this.postGroup.bind(this)
     this.postLeader = this.postLeader.bind(this)
+  }
+
+  componentDidMount() {
+    console.log("hi")
+
+
     this.getData()
     this.getId()
+
+  }
+  
+  changeGroupName = (e) => {
+  this.setState({groupName: e.target.value})
+  }
+  
+  changefName = (e) => {
+  this.setState({fName: e.target.value})
+  }
+  
+  changelName = (e) => {
+  this.setState({lName: e.target.value})
+  }
+  
+  changeEmail = (e) => {
+  this.setState({email: e.target.value})
   }
 
   getData = () => {
@@ -50,7 +81,7 @@ class NewGroup extends Component {
     const groupToSend = ({
       "id": this.newID,
       "url": apiUrl + "/" + this.newID,
-      "name": data.get('groupName')
+      "name": this.state.groupName
     })
     return this.postGroup(groupToSend)
   }
@@ -70,13 +101,10 @@ class NewGroup extends Component {
   }
 
   submitLeader(event) {
-    const form = this.refs.form;
-    console.log("form", form)
-    const data = new FormData(form);
     const mainUserToSend = ({
-      "email": data.get("main-email"),
-      "fname": data.get("main-fname"),
-      "lname": data.get("main-lname"),
+      "email": this.state.email,
+      "fname": this.state.fName,
+      "lname": this.state.lName,
       "group_id": this.newID
       })
     return this.postLeader(mainUserToSend)
@@ -104,11 +132,11 @@ class NewGroup extends Component {
         <div className="form">
           <p className="instructions">Enter details about your group.</p>
           <form ref="form" className="memberForm" onSubmit={this.onSubmit}>
-            <input placeholder="Group Name" type="text" name="groupName"/>
+            <input placeholder="Group Name" type="text" name="groupName" onChange={this.changeGroupName}/>
             <section className="person-entry">
-              <input placeholder="Your First Name" type="text" name="main-fname"/>
-              <input placeholder="Your Last Name" type="text" name="main-lname"/>
-              <input placeholder="Your Email" type="text" name="main-email"/>
+              <input placeholder="Your First Name" type="text" name="main-fname" onChange={this.changefName}/>
+              <input placeholder="Your Last Name" type="text" name="main-lname" onChange={this.changelName}/>
+              <input placeholder="Your Email" type="text" name="main-email" onChange={this.changeEmail}/>
             </section>
             <input className="formEnd" type="submit" value="Continue">
             </input>

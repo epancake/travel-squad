@@ -11,6 +11,38 @@ class Dates extends Component {
 
     this.state = {
       buttons: [],
+      startDate: 0,
+      endDate: 0,
+      row1col1: false,
+      row1col2: false,
+      row1col3: false,
+      row1col4: false,
+      row1col5: false,
+      row2col1: false,
+      row2col2: false,
+      row2col3: false,
+      row2col4: false,
+      row2col5: false,
+      row3col1: false,
+      row3col2: false,
+      row3col3: false,
+      row3col4: false,
+      row3col5: false,
+      row4col1: false,
+      row4col2: false,
+      row4col3: false,
+      row4col4: false,
+      row4col5: false,
+      row5col1: false,
+      row5col2: false,
+      row5col3: false,
+      row5col4: false,
+      row5col5: false,
+      row6col1: false,
+      row6col2: false,
+      row6col3: false,
+      row6col4: false,
+      row6col5: false
     }
   }
 
@@ -24,7 +56,7 @@ class Dates extends Component {
   })
   }
 
-  getUserLines(id){
+  populateUserNames(id){
       let row = 0
       return this.props.users.map(user => {
         if (user.group_id == id) {
@@ -32,64 +64,63 @@ class Dates extends Component {
           return (
             <tr key={user.id} className="person">
               <td>{user.fname + " " + user.lname}</td>
-              {this.getNum(row)}
+              {this.getNumOfButtonsForRow(row)}
             </tr>
           )
         }
       })
     }
 
-    finalRow(){
-      let usersHere = 0
-      this.props.users.map(user => {
-        if (user.group_id == window.location.href.slice(-9)) {
-          usersHere++
+  addFinalRow(){
+    let usersHere = 0
+    this.props.users.map(user => {
+      if (user.group_id == window.location.href.slice(-9)) {
+        usersHere++
+      }
+    })
+      return (
+        <tr className="final">
+          <td>Final Choice</td>
+          {this.getNumOfButtonsForRow(usersHere+1)}
+        </tr>
+      )
+  }
+
+  populateButtonChecks = (row, col) => {
+      let buttonsArray = []
+      this.state.buttons.map(button => {
+        if (button.group_id == window.location.href.slice(-9)) {
+          buttonsArray.push(button)
         }
       })
+      let lastSave = buttonsArray[buttonsArray.length-1]
+      let cellName = `row${row}col${col}`
+      if (lastSave) {
+        if (lastSave[cellName] === true) {
+          return true
+        }
+      } else return false
+  }
+
+  getNumOfButtonsForRow = (row) => {
+    numOfDates = 0
+    return this.props.dates.map(date => {
+      if (date.group_id == window.location.href.slice(-9)) {
+        numOfDates ++
+        let name = `this.state.row${row}col${numOfDates}`
+        let checkForChecks = this.populateButtonChecks(row, numOfDates)
         return (
-          <tr className="final">
-            <td>Final Choice</td>
-            {this.getNum(usersHere+1)}
-          </tr>
+          <td key={Math.random()} className="radiotd">
+          <div className="flexDiv">
+            <input type="checkbox" defaultChecked={checkForChecks} name={`row${row}col${numOfDates}`} id={`dateChoice${numOfDates}`} value=""/>
+          </div>
+          </td>
         )
-    }
+      }
+    })
+  }
 
-    isItChecked = (row, col) => {
-        let buttonsArray = []
-        this.state.buttons.map(button => {
-          if (button.group_id == window.location.href.slice(-9)) {
-            buttonsArray.push(button)
-          }
-        })
-        let lastSave = buttonsArray[buttonsArray.length-1]
-        let cellName = `row${row}col${col}`
-        if (lastSave) {
-          if (lastSave[cellName] === true) {
-            return true
-          }
-        } else return false
-
-    }
-
-    getNum = (row) => {
-      numOfDates = 0
-      return this.props.dates.map(date => {
-        if (date.group_id == window.location.href.slice(-9)) {
-          numOfDates ++
-          let name = `this.state.row${row}col${numOfDates}`
-          let checkForChecks = this.isItChecked(row, numOfDates)
-          return (
-            <td key={Math.random()} className="radiotd">
-            <div className="flexDiv">
-              <input type="checkbox" defaultChecked={checkForChecks} name={`row${row}col${numOfDates}`} id={`dateChoice${numOfDates}`} value=""/>
-            </div>
-            </td>
-          )
-        }
-      })
-    }
-
-  suggestedDates(){
+  populateDates(){
     return this.props.dates.map(date => {
       if (date.group_id == window.location.href.slice(-9)) {
         return (
@@ -99,39 +130,32 @@ class Dates extends Component {
     })
   }
 
-  submitDates = (event) => {
+  makePostableDateObject = (event) => {
     event.preventDefault()
     const groupID = window.location.href.slice(-9)
-    const form = event.target;
-    const data = new FormData(form);
-    const startDateMonth = () => {
-      if (data.get("dateStart")[5] > 0) {
-        return months[data.get("dateStart")[6]+9]
-      } else return months[data.get("dateStart")[6]-1]
-    }
     const Month = (date) => {
-      if (data.get(date)[5] > 0) {
-        return months[data.get(date)[6]+9]
-      } else return months[data.get(date)[6]-1]
+      if (date[5] > 0) {
+        return months[date[6]+9]
+      } else return months[date[6]-1]
     }
     const Day = (date) => {
-      return `${data.get(date)[8]}${data.get(date)[9]}`
+      return `${date[8]}${date[9]}`
     }
     const Year = (date) => {
-      return `${data.get(date)[0]}${data.get(date)[1]}${data.get(date)[2]}${data.get(date)[3]}`
+      return `${date[0]}${date[1]}${date[2]}${date[3]}`
     }
     const dateToSend = ({
-      "dateSuggestion": `${Month("dateStart")} ${Day("dateStart")}, ${Year("dateStart")} to ${Month("dateEnd")} ${Day("dateEnd")}, ${Year("dateEnd")}`,
+      "dateSuggestion": `${Month(this.state.startDate)} ${Day(this.state.startDate)}, ${Year(this.state.startDate)} to ${Month(this.state.endDate)} ${Day(this.state.endDate)}, ${Year(this.state.endDate)}`,
       "group_id": groupID
       })
     this.postDate(dateToSend)
   }
 
-    postDate = (user) => {
+    postDate = (date) => {
       let url = apiUrl + "/dates"
       fetch(url, {
         method: 'POST',
-        body: JSON.stringify(user),
+        body: JSON.stringify(date),
         headers: new Headers({
           'Content-Type': 'application/json'
       })
@@ -143,6 +167,7 @@ class Dates extends Component {
     onSubmitRadioForm = (event) => {
       event.preventDefault()
       const form = event.target;
+      console.log('form', form)
       const data = new FormData(form);
       const row1col1 = () => {
         if (data.get("row1col1") != null) {
@@ -330,17 +355,29 @@ class Dates extends Component {
       this.postButtons(objectToSend)
     }
 
-    postButtons = (objectToSend) => {
-      let url = apiUrl + "/buttons"
-      fetch(url, {
-        method: 'POST',
-        body: JSON.stringify(objectToSend),
-        headers: new Headers({
-          'Content-Type': 'application/json'
-      })
-      }).then(res => res.json())
-      .catch(error => console.error('Error:', error))
-    }
+  postButtons = (objectToSend) => {
+    let url = apiUrl + "/buttons"
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(objectToSend),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+    })
+    }).then(res => res.json())
+    .catch(error => console.error('Error:', error))
+  }
+  
+  handleInputStartDate = (e) => {
+    this.setState({startDate: e.target.value});
+  }
+  
+  handleInputEndDate = (e) => {
+    this.setState({endDate: e.target.value});
+  }
+  
+  handleBoxChange = (e) => {
+    console.log(e.target)
+  }
 
   render() {
     return (
@@ -348,12 +385,12 @@ class Dates extends Component {
       <div className="dates">
         <h2>Dates:</h2>
 
-        <form className="submissionForm" onSubmit={this.submitDates}>
+        <form className="submissionForm" onSubmit={this.makePostableDateObject}>
           <div className="inputContainer">
             <label>Suggest Dates: </label>
-            <input name="dateStart" type="date"></input>
+            <input name="dateStart" type="date" onInput={this.handleInputStartDate}></input>
             <p>to</p>
-            <input name="dateEnd" type="date"></input>
+            <input name="dateEnd" type="date" onInput={this.handleInputEndDate}></input>
           </div>
           <input type="submit"/>
         </form>
@@ -363,10 +400,10 @@ class Dates extends Component {
             <tbody>
               <tr>
                 <th >People</th>
-                {this.suggestedDates()}
+                {this.populateDates()}
               </tr>
-              {this.getUserLines(window.location.href.slice(-9))}
-              {this.finalRow()}
+              {this.populateUserNames(window.location.href.slice(-9))}
+              {this.addFinalRow()}
             </tbody>
           </table>
           <input type="submit" value="Save Table"></input>

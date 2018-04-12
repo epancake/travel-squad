@@ -37,7 +37,7 @@ React, Express, Knex, Postgresql, Node, Socket.io, Nodemailer, Cheerio.
 ## Author
 Emily Pancake - Full Stack Web Developer - Denver, Colorado
 
-[GitHub](https://github.com/epancake)
+[Portfolio Site](https://emilypancake.com)
 
 [LinkedIn](www.linkedin.com/in/emilypancake/)
 

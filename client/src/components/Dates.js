@@ -10,7 +10,7 @@ class Dates extends Component {
     super(props)
 
     this.state = {
-      buttons: [],
+      buttons: [],  
       startDate: 0,
       endDate: 0,
       row1col1: false,
@@ -97,6 +97,7 @@ class Dates extends Component {
       let cellName = `row${row}col${col}`
       if (lastSave) {
         if (lastSave[cellName] === true) {
+          this.setState({[cellName]: true})
           return true
         }
       } else return false
@@ -107,17 +108,22 @@ class Dates extends Component {
     return this.props.dates.map(date => {
       if (date.group_id == window.location.href.slice(-9)) {
         numOfDates ++
-        let name = `this.state.row${row}col${numOfDates}`
+        let name = `row${row}col${numOfDates}`
         let checkForChecks = this.populateButtonChecks(row, numOfDates)
         return (
-          <td key={Math.random()} className="radiotd">
+          <td key={name} className="radiotd">
           <div className="flexDiv">
-            <input type="checkbox" defaultChecked={checkForChecks} name={`row${row}col${numOfDates}`} id={`dateChoice${numOfDates}`} value=""/>
+            <input type="checkbox" defaultChecked={checkForChecks} onChange={this.handleBoxChange} name={name} id={`dateChoice${numOfDates}`}/>
           </div>
           </td>
         )
       }
     })
+  }
+  
+  handleBoxChange = (e) => {
+    console.log(e.target.checked)
+    this.setState({[e.target.name]: e.target.checked})
   }
 
   populateDates(){
@@ -167,7 +173,7 @@ class Dates extends Component {
     onSubmitRadioForm = (event) => {
       event.preventDefault()
       const form = event.target;
-      console.log('form', form)
+      console.log('form', event.target)
       const data = new FormData(form);
       const row1col1 = () => {
         if (data.get("row1col1") != null) {
@@ -375,9 +381,7 @@ class Dates extends Component {
     this.setState({endDate: e.target.value});
   }
   
-  handleBoxChange = (e) => {
-    console.log(e.target)
-  }
+
 
   render() {
     return (
